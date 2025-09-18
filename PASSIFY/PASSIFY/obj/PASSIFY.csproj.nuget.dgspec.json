@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\W0509891\\Documents\\INET2005\\ASSIGNMENTS\\PASSIFY\\PASSIFY\\PASSIFY.csproj": {}
+    "C:\\Users\\lemem\\Documents\\NSCC\\second_year\\INET2005\\INET-ASSIGNMENT\\PASSIFY\\PASSIFY\\PASSIFY.csproj": {}
   },
   "projects": {
-    "C:\\Users\\W0509891\\Documents\\INET2005\\ASSIGNMENTS\\PASSIFY\\PASSIFY\\PASSIFY.csproj": {
+    "C:\\Users\\lemem\\Documents\\NSCC\\second_year\\INET2005\\INET-ASSIGNMENT\\PASSIFY\\PASSIFY\\PASSIFY.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\W0509891\\Documents\\INET2005\\ASSIGNMENTS\\PASSIFY\\PASSIFY\\PASSIFY.csproj",
+        "projectUniqueName": "C:\\Users\\lemem\\Documents\\NSCC\\second_year\\INET2005\\INET-ASSIGNMENT\\PASSIFY\\PASSIFY\\PASSIFY.csproj",
         "projectName": "PASSIFY",
-        "projectPath": "C:\\Users\\W0509891\\Documents\\INET2005\\ASSIGNMENTS\\PASSIFY\\PASSIFY\\PASSIFY.csproj",
-        "packagesPath": "C:\\Users\\W0509891\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\W0509891\\Documents\\INET2005\\ASSIGNMENTS\\PASSIFY\\PASSIFY\\obj\\",
+        "projectPath": "C:\\Users\\lemem\\Documents\\NSCC\\second_year\\INET2005\\INET-ASSIGNMENT\\PASSIFY\\PASSIFY\\PASSIFY.csproj",
+        "packagesPath": "C:\\Users\\lemem\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lemem\\Documents\\NSCC\\second_year\\INET2005\\INET-ASSIGNMENT\\PASSIFY\\PASSIFY\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\W0509891\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lemem\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -25,8 +25,7 @@
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
         },
         "frameworks": {
           "net9.0": {
@@ -68,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
