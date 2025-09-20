@@ -21,13 +21,24 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Hoe</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    
+                    <!--Created -->
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Create" asp-action="Index">Create</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="Index">Tickets</a>
                     </li>
                 </ul>
             </div>
+            
+            @*Search Bar cancelled for now*@
+            @* <form class="form-inline my-2 my-lg-0"> *@
+            @*     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> *@
+            @*     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> *@
+            @* </form> *@
         </div>
     </nav>
 </header>
