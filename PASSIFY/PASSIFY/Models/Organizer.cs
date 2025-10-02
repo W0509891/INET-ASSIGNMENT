@@ -4,9 +4,9 @@ namespace PASSIFY.Models
 {
     public class Organizer
     {
-        private int OrganizerId {get; set; } //Primary Key
-        private string Name {get; set; } = string.Empty;
+        public int OrganizerId {get; set; } //Primary Key
+        public string Name {get; set; } = string.Empty;
 
-        private List<Activity>? Activities {get; set; }
+        public List<Activity>? Activities {get; set; }
     }
 }
