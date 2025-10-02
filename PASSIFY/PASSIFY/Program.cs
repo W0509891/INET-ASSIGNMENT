@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PASSIFY.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<PASSIFYContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PASSIFYContext") ?? throw new InvalidOperationException("Connection string 'PASSIFYContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

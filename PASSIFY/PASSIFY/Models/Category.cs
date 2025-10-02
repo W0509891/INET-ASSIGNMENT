@@ -1,8 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace PASSIFY.Models;
 
 public class Category
 {
-    public int Id { get; set; }
-    public string Type { get; set; } = string.Empty;
+    
+    //Primary Key
+    public int CategoryId { get; set; }
+    public string Title { get; set; } = string.Empty;
+
+    //Navigation Property
+    public List<Activity>? Activities { get; set; }
 }
 

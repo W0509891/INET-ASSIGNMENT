@@ -1,9 +1,12 @@
-﻿namespace PASSIFY.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PASSIFY.Models
 {
     public class Organizer
     {
-        private int Id {get; set; } //Primary Key
+        private int OrganizerId {get; set; } //Primary Key
         private string Name {get; set; } = string.Empty;
-        private int EventId {get; set; } // Foreign Key
+
+        private List<Activity>? Activities {get; set; }
     }
 }
