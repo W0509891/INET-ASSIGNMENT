@@ -2,45 +2,47 @@
 
 @{
     ViewData["Title"] = "Index";
+    var imgWidth = "15px";
 }
 
 <h1>Events Database</h1>
 
-<p >
+<p>
     <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventStart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventEnd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Modified)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Organizer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventEnd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Organizer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -67,11 +69,16 @@
                 @Html.DisplayFor(modelItem => item.Category.CategoryId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ActivityId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ActivityId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ActivityId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ActivityId" aria-description="Edit">
+                    <img src="assets/svg/icons8-edit-pencil.svg" width=@imgWidth/>
+                </a>
+                |
+                <a asp-action="Details" asp-route-id="@item.ActivityId"><img
+                        src="assets/svg/dots-horizontal-svgrepo-com.svg" width=@imgWidth/></a> |
+                <a asp-action="Delete" asp-route-id="@item.ActivityId"><img
+                        src="assets/svg/bin-cancel-close-delete-garbage-remove-svgrepo-com.svg" width=@imgWidth/></a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
