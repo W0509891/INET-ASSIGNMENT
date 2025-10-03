@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Index";
+    var imgWidth = "15px";
+    
 }
 
 <h1>Categories Database</h1>
@@ -25,9 +27,9 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.CategoryId"><img src="assets/svg/edit.svg" width=@imgWidth/></a> |
+                <a asp-action="Details" asp-route-id="@item.CategoryId"><img src="assets/svg/details.svg" width="@imgWidth"> </a> |
+                <a asp-action="Delete" asp-route-id="@item.CategoryId"><img src="assets/svg/delete.svg" alt="" width="@imgWidth"></a>
             </td>
         </tr>
 }
