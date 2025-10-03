@@ -1,4 +1,4 @@
-﻿/PASSIFY/PASSIFY/bin*
-/PASSIFY/.vs*
-/PASSIFY/.idea*
-/PASSIFY/PASSIFY/obj*
+/PASSIFY/PASSIFY/obj/*
+/PASSIFY/PASSIFY/bin/*
+/PASSIFY/.idea/*
+/PASSIFY/.vs/*
