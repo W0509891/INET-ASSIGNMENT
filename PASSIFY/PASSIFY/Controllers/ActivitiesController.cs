@@ -49,8 +49,8 @@ namespace PASSIFY.Controllers
         // GET: Activities/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId");
-            ViewData["OrganizerId"] = new SelectList(_context.Set<Organizer>(), "OrganizerId", "OrganizerId");
+            ViewData["Category"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId");
+            ViewData["Organizer"] = new SelectList(_context.Set<Organizer>(), "OrganizerId", "OrganizerId");
             return View();
         }
 

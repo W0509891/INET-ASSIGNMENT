@@ -11,12 +11,12 @@ public class Activity
     public string Description { get; set; } = string.Empty;
     public DateTime EventStart { get; set; }
     public DateTime EventEnd { get; set; }
-    public DateTime Created { get; set; }
+    public DateTime Created { get; set; } = DateTime.Now;
     public DateTime Modified { get; set; }
 
     // Foreign Keys
-    public int OrganizerId { get; set; } 
-    public int CategoryId { get; set; } 
+    public int? OrganizerId { get; set; } 
+    public int? CategoryId { get; set; } 
 
     // Navigation Properties
     public Organizer? Organizer { get; set; }

@@ -1,0 +1,2 @@
+<a target="_blank" href="https://icons8.com/icon/48/edit-pencil">Edit Pencil</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+<a target="_blank" href="https://www.svgrepo.com/">Details Icon</a> icon by <a target="_blank" href="https://www.svgrepo.com/">Svg Repo</a>

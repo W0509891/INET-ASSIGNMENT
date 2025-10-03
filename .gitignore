@@ -1,9 +1,4 @@
-﻿/PASSIFY/PASSIFY/bin/*
-/PASSIFY/.vs/*
-/PASSIFY/.idea/*
-/PASSIFY/PASSIFY/obj/*
-/PASSIFY/PASSIFY/obj/Debug/net9.0/PASSIFY.AssemblyInfo.cs
-/PASSIFY/PASSIFY/obj/Debug/net9.0/PASSIFY.AssemblyInfoInputs.cache
-/PASSIFY/PASSIFY/obj/Debug/net9.0/PASSIFY.assets.cache
-/PASSIFY/PASSIFY/obj/Debug/net9.0/PASSIFY.GeneratedMSBuildEditorConfig.editorconfig
-/PASSIFY/PASSIFY/obj/Debug/net9.0/rpswa.dswa.cache.json
+﻿/PASSIFY/PASSIFY/bin*
+/PASSIFY/.vs*
+/PASSIFY/.idea*
+/PASSIFY/PASSIFY/obj*

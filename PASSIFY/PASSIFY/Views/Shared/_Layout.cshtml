@@ -22,22 +22,29 @@
                 <ul class="navbar-nav flex-grow-1">
                     
                     <!--Created -->
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Create" asp-action="Index">Create</a>
-                    </li>
-                    
-                    <li class="nav-item">
+
+                    @* Ticket view *@
+                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="Index">Tickets</a>
                     </li>
+                    
+                    @* Activities *@
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Activities" asp-action="Index">Create</a>
+                    </li>
 
+                    @* Activities *@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Activities" asp-action="Index">Events</a>
                     </li>
+
+                    @* Categories*@
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action=""></a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action=""></a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Organizers" asp-action="Index">Organizers</a>
                     </li>
                 </ul>
             </div>
