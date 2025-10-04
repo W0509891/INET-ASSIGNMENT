@@ -63,20 +63,26 @@
                 @Html.DisplayFor(modelItem => item.Modified)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Organizer.OrganizerId)
+                @Html.DisplayFor(modelItem => item.Organizer.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryId)
+                @Html.DisplayFor(modelItem => item.Category.Title)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ActivityId" aria-description="Edit">
-                    <img src="assets/svg/edit.svg" width=@imgWidth/>
-                </a>
-                |
-                <a asp-action="Details" asp-route-id="@item.ActivityId"><img
-                        src="assets/svg/details.svg" width=@imgWidth/></a> |
-                <a asp-action="Delete" asp-route-id="@item.ActivityId"><img
-                        src="assets/svg/delete.svg" width=@imgWidth/></a>
+                <div class="d-flex flex-row justify-content-between actions">
+
+                    <a asp-action="Edit" asp-route-id="@item.ActivityId" aria-description="Edit">
+                        <img src="assets/svg/edit.svg" width=@imgWidth/>
+                    </a>
+                
+                    <a asp-action="Details" asp-route-id="@item.ActivityId">
+                        <img src="assets/svg/details.svg" width=@imgWidth/>
+                    </a> 
+                    <a asp-action="Delete" asp-route-id="@item.ActivityId">
+                        <img src="assets/svg/delete.svg" width=@imgWidth/>
+                    </a>
+                </div>
+
             </td>
         </tr>
     }

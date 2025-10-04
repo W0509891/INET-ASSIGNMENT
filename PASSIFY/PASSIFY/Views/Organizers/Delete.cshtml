@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
+    var imgWidth = 30;
 }
 
 <h1>Delete</h1>
@@ -22,6 +23,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="OrganizerId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index" "><img src="~/assets/svg/back.svg" width=@string.Concat(imgWidth + 20, "px") alt="Back"></a>
     </form>
 </div>

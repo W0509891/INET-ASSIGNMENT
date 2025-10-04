@@ -49,8 +49,8 @@ namespace PASSIFY.Controllers
         // GET: Activities/Create
         public IActionResult Create()
         {
-            ViewData["Category"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId");
-            ViewData["Organizer"] = new SelectList(_context.Set<Organizer>(), "OrganizerId", "OrganizerId");
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "Title");
+            ViewData["OrganizerId"] = new SelectList(_context.Set<Organizer>(), "OrganizerId", "Name");
             return View();
         }
 
@@ -61,6 +61,9 @@ namespace PASSIFY.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ActivityId,Title,Description,EventStart,EventEnd,Created,Modified,OrganizerId,CategoryId")] Activity activity)
         {
+            activity.Created = DateTime.Now;
+            activity.Modified = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 _context.Add(activity);
@@ -85,8 +88,8 @@ namespace PASSIFY.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId", activity.CategoryId);
-            ViewData["OrganizerId"] = new SelectList(_context.Set<Organizer>(), "OrganizerId", "OrganizerId", activity.OrganizerId);
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "Title", activity.Category);
+            ViewData["OrganizerId"] = new SelectList(_context.Set<Organizer>(), "OrganizerId", "Name", activity.Organizer);
             return View(activity);
         }
 

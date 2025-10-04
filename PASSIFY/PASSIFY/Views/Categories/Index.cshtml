@@ -11,7 +11,7 @@
 <p>
     <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table w-25">
     <thead>
         <tr>
             <th>
@@ -27,9 +27,13 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoryId"><img src="assets/svg/edit.svg" width=@imgWidth/></a> |
-                <a asp-action="Details" asp-route-id="@item.CategoryId"><img src="assets/svg/details.svg" width="@imgWidth"> </a> |
+                    <div class="d-flex flex-row justify-content-between">
+                <a asp-action="Edit" asp-route-id="@item.CategoryId"><img src="assets/svg/edit.svg" width=@imgWidth/></a> 
+                <a asp-action="Details" asp-route-id="@item.CategoryId"><img src="assets/svg/details.svg" width="@imgWidth"> </a> 
                 <a asp-action="Delete" asp-route-id="@item.CategoryId"><img src="assets/svg/delete.svg" alt="" width="@imgWidth"></a>
+
+                </div>
+
             </td>
         </tr>
 }
