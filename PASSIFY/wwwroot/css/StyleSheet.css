@@ -1,0 +1,13 @@
+﻿.actions {
+    /*    width: 150%;*/
+}
+
+th:last-of-type, td:last-of-type {
+    width: 100px;
+}
+
+
+
+.w-x {
+    width: 100px;
+}
