@@ -33,6 +33,14 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Activities" asp-action="Index">Create</a>
                     </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index_old">Index_old</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Index_new</a>
+                    </li>
 
                     @* Activities *@
                     <li class="nav-item">
@@ -58,7 +66,8 @@
         </div>
     </nav>
 </header>
-<div class="container">
+<div class="container d-flex">
+   @*todo: implement side bar nav*@
     <main role="main" class="pb-3">
         @RenderBody()
     </main>

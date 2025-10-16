@@ -26,6 +26,15 @@ public class HomeController : Controller
             
         return View(await pASSIFYContext.ToListAsync());
     }
+    
+    public async Task<IActionResult> Index_old()
+    {
+        var pASSIFYContext = _context.Activity
+            .Include(a => a.Category)
+            .Include(a => a.Organizer);
+            
+        return View(await pASSIFYContext.ToListAsync());
+    }
 
     public IActionResult Privacy()
     {
