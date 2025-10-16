@@ -2,8 +2,8 @@
     /*    width: 150%;*/
 }
 
-th:last-of-type, td:last-of-type {
-    width: 100px;
+.table-head:last-of-type, .table-cell:last-of-type {
+    width: 50%;
 }
 
 
