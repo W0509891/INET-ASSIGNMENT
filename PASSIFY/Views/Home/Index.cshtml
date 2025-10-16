@@ -6,6 +6,8 @@
     var imgWidth = "15px";
 
 }
+<link rel="stylesheet" href="~/css/scratch_styles.css" asp-append-version="true"/>
+ 
 
 <div class="text-center">
     <h1 class="display-4">Welcome <span class="text-secondary">User.Name</span> to your Passify admin Dashboard</h1>
@@ -17,94 +19,94 @@
     <p>Add a new Organizer</p>
 </section> 
 
-
-@*TODO: convert table to div layout*@
 <section>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventStart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventEnd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
+    <div class="table2">
+
+        <div class="table-header fw-bold">
+            <div class="table-row">
+                <div class="table-head">
+                    @Html.DisplayNameFor(model => model.Title)
+                </div>
+                <div class="table-head">
+                    @Html.DisplayNameFor(model => model.Description)
+                </div>
+                <div class="table-head">
+                    @Html.DisplayNameFor(model => model.EventStart)
+                </div>
+                <div class="table-head">
+                    @Html.DisplayNameFor(model => model.EventEnd)
+                </div>
+                <div class="table-head">
+                    @Html.DisplayNameFor(model => model.Created)
+                </div>
             
-            @* <th> *@
-            @*     @Html.DisplayNameFor(model => model.Modified) *@
-            @* </th> *@
+                @* <div class="table-head"> *@
+                @*     @Html.DisplayNameFor(model => model.Modified) *@
+                @* </div> *@
             
-            <th>
-                @Html.DisplayNameFor(model => model.Organizer)
-            </th>
+                <div class="table-head">
+                    @Html.DisplayNameFor(model => model.Organizer)
+                </div>
             
-            @* <th> *@
-            @*     @Html.DisplayNameFor(model => model.Category) *@
-            @* </th> *@
+                @* <div class="table-head"> *@
+                @*     @Html.DisplayNameFor(model => model.Category) *@
+                @* </div> *@
             
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
+                <div class="table-head"></div>
+            </div>
+        </div>
+        
+        <div class="table-body">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            <div class="table-row" onclick="open('@Url.Action("Details","Activities", new { id = item.ActivityId })')">
+                <div class="table-cell">
                     @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
+                </div>
+                <div class="table-cell">
                     @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
+                </div>
+                <div class="table-cell">
                     @Html.DisplayFor(modelItem => item.EventStart)
-                </td>
-                <td>
+                </div>
+                <div class="table-cell">
                     @Html.DisplayFor(modelItem => item.EventEnd)
-                </td>
-                <td>
+                </div>
+                <div class="table-cell">
                     @Html.DisplayFor(modelItem => item.Created)
-                </td>
+                </div>
                 
-                @* <td> *@
+                @* <div class="table-cell"> *@
                 @*     @Html.DisplayFor(modelItem => item.Modified) *@
-                @* </td> *@
+                @* </div> *@
                 
-                <td>
+                <div class="table-cell">
                     @Html.DisplayFor(modelItem => item.Organizer.Name)
-                </td>
+                </div>
                 
-                @* <td> *@
+                @* <div class="table-cell"> *@
                 @*     @Html.DisplayFor(modelItem => item.Category.Title) *@
-                @* </td> *@
+                @* </div> *@
                 
-                <td>
+                <div class="table-cell">
                     <div class="d-flex flex-row justify-content-between actions">
 
-                        <a asp-action="Edit" asp-route-id="@item.ActivityId" aria-description="Edit">
+                        <a asp-controller="Activities" asp-action="Edit" asp-route-id="@item.ActivityId" aria-description="Edit">
                             <img src="assets/svg/edit.svg" width=@imgWidth/>
                         </a>
 
-                        <a asp-action="Details" asp-route-id="@item.ActivityId">
+                        <a  asp-controller="Activities" asp-action="Details" asp-route-id="@item.ActivityId">
                             <img src="assets/svg/details.svg" width=@imgWidth/>
                         </a>
-                        <a asp-action="Delete" asp-route-id="@item.ActivityId">
+                        <a asp-controller="Activities" asp-action="Delete" asp-route-id="@item.ActivityId">
                             <img src="assets/svg/delete.svg" width=@imgWidth/>
                         </a>
                     </div>
 
-                </td>
-            </tr>
+                </div>
+            </div>
         }
-        </tbody>
-    </table>
+        </div>
+    </div>
 
 </section>
