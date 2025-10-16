@@ -1,0 +1,51 @@
+﻿.table2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /*border: solid 1px black;*/
+    margin-bottom: 1em;
+    vertical-align: top;
+}
+
+
+.table2 .table-body, .table2 .table-header {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    justify-content: space-around;
+}
+
+.table-body > .table-row:nth-of-type(odd) {
+    background-color: #f0f0f0;
+}
+
+.table2 .table-row {
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    justify-content: space-around;
+    border-bottom: solid 1px black;
+}
+
+.table-head, .table-cell {
+    /*display: table-cell;*/
+    padding: .5rem .5rem;
+    flex-grow: 1;
+    width: 100%;
+    text-align: left;
+    align-self: center;
+    word-wrap: anywhere;
+
+}
+
+.table-head:hover, .table-cell:hover {
+    /*background-color: #222121;*/
+}
+
+.table-row:nth-of-type(2) .table-cell:nth-of-type(2) {
+    background-color: #ffda6a;
+    outline: 1px solid #00da00;
+}
+
