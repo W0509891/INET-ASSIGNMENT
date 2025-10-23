@@ -63,5 +63,5 @@
 </div>
 <div class="w-x d-flex justify-content-sm-between align-items-center">
     <a asp-action="Edit" asp-route-id="@Model?.ActivityId"><img src="/assets/svg/edit.svg" width=@string.Concat(imgWidth, "px")/></a>
-    <a asp-action="Index"><img src="~/assets/svg/back.svg" width=@string.Concat(imgWidth+20, "px") alt="Back"></a>
+    <a asp-controller="Extra" asp-action="LastPage"><img src="~/assets/svg/back.svg" width=@string.Concat(imgWidth+20, "px") alt="Back"></a>
 </div>
