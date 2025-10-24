@@ -22,7 +22,7 @@ public class AccountController : Controller
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, username), // unique ID
-                new Claim(ClaimTypes.Name, "DASIL"), // human readable name
+                new Claim(ClaimTypes.Name, "Dasil"), // human readable name
                 new Claim(ClaimTypes.Role, "Smuggler"), // could use roles if needed         
             };
 
