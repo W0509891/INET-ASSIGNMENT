@@ -3,110 +3,101 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    var imgWidth = "15px";
+    var imgWidth = "25px";
 
 }
-<link rel="stylesheet" href="~/css/scratch_styles.css" asp-append-version="true"/>
- 
 
-<div class="text-center">
-    <h1 class="display-4">Welcome <span class="text-secondary">User.Name</span> to your Passify admin Dashboard</h1>
+<div class="text-center p-3">
+    <h1 class="display-4">Welcome <span class="text-secondary">@User.Identity.Name</span> to your Passify Dashboard</h1>
 </div>
 
-<section class="d-grid">
-    <p>Add an Event</p>
-    <p>Add a new Category</p>
-    <p>Add a new Organizer</p>
-</section> 
-
-<section>
-    <div class="table2">
-
-        <div class="table-header fw-bold">
-            <div class="table-row">
-                <div class="table-head">
-                    @Html.DisplayNameFor(model => model.Title)
-                </div>
-                <div class="table-head">
-                    @Html.DisplayNameFor(model => model.Description)
-                </div>
-                <div class="table-head">
-                    @Html.DisplayNameFor(model => model.EventStart)
-                </div>
-                <div class="table-head">
-                    @Html.DisplayNameFor(model => model.EventEnd)
-                </div>
-                <div class="table-head">
-                    @Html.DisplayNameFor(model => model.Created)
-                </div>
-            
-                @* <div class="table-head"> *@
-                @*     @Html.DisplayNameFor(model => model.Modified) *@
-                @* </div> *@
-            
-                <div class="table-head">
-                    @Html.DisplayNameFor(model => model.Organizer)
-                </div>
-            
-                @* <div class="table-head"> *@
-                @*     @Html.DisplayNameFor(model => model.Category) *@
-                @* </div> *@
-            
-                <div class="table-head"></div>
-            </div>
-        </div>
-        
-        <div class="table-body">
-        @foreach (var item in Model)
-        {
-            <div class="table-row" onclick="open('@Url.Action("Details","Activities", new { id = item.ActivityId })')">
-                <div class="table-cell">
-                    @Html.DisplayFor(modelItem => item.Title)
-                </div>
-                <div class="table-cell">
-                    @Html.DisplayFor(modelItem => item.Description)
-                </div>
-                <div class="table-cell">
-                    @Html.DisplayFor(modelItem => item.EventStart)
-                </div>
-                <div class="table-cell">
-                    @Html.DisplayFor(modelItem => item.EventEnd)
-                </div>
-                <div class="table-cell">
-                    @Html.DisplayFor(modelItem => item.Created)
-                </div>
-                
-                @* <div class="table-cell"> *@
-                @*     @Html.DisplayFor(modelItem => item.Modified) *@
-                @* </div> *@
-                
-                <div class="table-cell">
-                    @Html.DisplayFor(modelItem => item.Organizer.Name)
-                </div>
-                
-                @* <div class="table-cell"> *@
-                @*     @Html.DisplayFor(modelItem => item.Category.Title) *@
-                @* </div> *@
-                
-                <div class="table-cell">
-                    <div class="d-flex flex-row justify-content-between actions">
-
-                        <a asp-controller="Activities" asp-action="Edit" asp-route-id="@item.ActivityId" aria-description="Edit">
-                            <img src="assets/svg/edit.svg" width=@imgWidth/>
-                        </a>
-
-                        <a  asp-controller="Activities" asp-action="Details" asp-route-id="@item.ActivityId">
-                            <img src="assets/svg/details.svg" width=@imgWidth/>
-                        </a>
-                        <a asp-controller="Activities" asp-action="Delete" asp-route-id="@item.ActivityId">
-                            <img src="assets/svg/delete.svg" width=@imgWidth/>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        }
-        </div>
+<section class="d-flex justify-content-end p-1">
+    <div class="d-flex justify-content-between">
+        @* Add event *@
+        <a asp-controller="Activities" asp-action="Create" class="m-2 link-dark text-decoration-none">
+            <img src="assets/svg/event_3.svg" width="@imgWidth" alt="Add Event Icon">
+            <span style="">Add event</span>
+        </a>
+        @* Add Category *@
+        <a asp-controller="Categories" asp-action="Create" class="m-2 link-dark text-decoration-none">
+            <img src="assets/svg/cat_tag.svg" width="@imgWidth" alt="Add Category Icon"/>
+            <span>Add category</span>
+        </a>
+        <a asp-controller="Organizers" asp-action="Create" class="m-2 link-dark text-decoration-none">
+            <img src="assets/svg/organizer.svg" width="@imgWidth" alt="Add Organizer Icon"/>
+            <span>Add organizer</span>       
+        </a>
     </div>
+</section>
+
+
+@*TODO: convert table to div layout*@
+<section class="p-2">
+    <table class="table table-striped table-hover">
+        <thead class="bg-body-secondary">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EventImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organizer)
+            </th>
+        </tr>
+        </thead>
+        
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr data-title="@item.Title" data-id="@item.ActivityId" class="pe-auto align-middle">
+                    <td class="">
+                        @if(item.EventImage == null)
+                        {
+                            <img src="@Url.Content("~/assets/photos/wallpaperflare.com_wallpaper.JPG")" alt="" class="img-thumb">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/assets/photos/" + item.EventImageName)" alt="" class="img-thumb">
+
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventStart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventEnd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Created)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Organizer.Name)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
 
 </section>
