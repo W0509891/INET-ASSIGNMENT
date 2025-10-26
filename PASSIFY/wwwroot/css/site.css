@@ -30,3 +30,13 @@ body {
   text-align: start;
 }
 
+span:hover{
+    cursor: pointer;
+    color: rgba(255, 0, 0, 0.58);
+}
+
+.img-thumb{
+    /*width: 100px;*/
+    height: 50px;
+    object-fit: cover;
+}

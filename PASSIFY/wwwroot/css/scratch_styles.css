@@ -7,6 +7,9 @@
     vertical-align: top;
 }
 
+.table2 *{
+    font-size: 0.9rem;
+}
 
 .table2 .table-body, .table2 .table-header {
     width: inherit;
@@ -36,16 +39,18 @@
     width: 100%;
     text-align: left;
     align-self: center;
-    word-wrap: anywhere;
-
+    /*word-wrap: anywhere;*/
+    text-overflow: ellipsis;
+    border-right: solid 1px black;
 }
 
-.table-head:hover, .table-cell:hover {
-    /*background-color: #222121;*/
+.table-body .table-row:hover {
+    background-color: #cccaca;
+    cursor: pointer;
 }
 
 .table-row:nth-of-type(2) .table-cell:nth-of-type(2) {
-    background-color: #ffda6a;
-    outline: 1px solid #00da00;
+    /*background-color: #ffda6a;*/
+    /*outline: 1px solid #00da00;*/
 }
 
