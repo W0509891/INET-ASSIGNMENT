@@ -4,6 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>0a4d5083-1f7b-4648-8b7e-1c6b91365177</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\assets\svg\" />
+      <_ContentIncludedByDefault Remove="Views\Ticket\Index.cshtml" />
     </ItemGroup>
 
 </Project>
