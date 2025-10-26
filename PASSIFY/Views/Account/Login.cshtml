@@ -8,12 +8,18 @@
 <link rel="stylesheet" href="~/PASSIFY.styles.css" asp-append-version="true"/>
 
 
-<div class="d-flex justify-content-evenly min-vw-100 min-vh-100">
+<div class="d-flex justify-content-evenly min-vh-100">
     <aside class="w-75 bg-secondary border-end"></aside>
     <aside class="w-25 d-flex  flex-column justify-content-center align-items-center">
     
         
-        <div class="container border-black w-90 p-x rounded-3 my-shadow">
+        <div class="border-black w-90 p-x rounded-3 my-shadow">
+            @if(ViewBag.ErrorMessage != null)
+            {
+                <p class="alert alert-danger">
+                    @ViewBag.ErrorMessage
+                </p>
+            }
             <h5 class="text-center">Welcome back</h5>
 
             <form asp-action="Login" method="post" class="">
