@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PASSIFY.Models.Organizer>
+
+@{
+    ViewData["Title"] = "Index";
+    var imgWidth = "15px";
+}
+
+<h1>Organizers Database</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table class="table w-25">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr data-id="@item.OrganizerId">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                    <div class="d-flex flex-row justify-content-between actions">
+                <a asp-action="Edit" asp-route-id="@item.OrganizerId"><img src="~/assets/svg/edit.svg" width=@imgWidth/></a>
+                    <a asp-action="Details" asp-route-id="@item.OrganizerId"><img src="~/assets/svg/details.svg" width=@imgWidth /></a>
+                    <a asp-action="Delete" asp-route-id="@item.OrganizerId"><img src="~/assets/svg/delete.svg" width=@imgWidth /></a>
+                    </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

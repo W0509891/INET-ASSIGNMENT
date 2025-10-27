@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASSIFY", "PASSIFY\PASSIFY.csproj", "{9F1D4C26-9AD1-4CE7-A3F8-191A9478247C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASSIFY", "PASSIFY.csproj", "{9F1D4C26-9AD1-4CE7-A3F8-191A9478247C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="~/css/scratch_styles.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/PASSIFY.styles.css" asp-append-version="true"/>
+
+
+<div class="d-flex justify-content-evenly min-vh-100">
+    <aside class="w-75 bg-secondary border-end"></aside>
+    <aside class="w-25 d-flex  flex-column justify-content-center align-items-center">
+    
+        
+        <div class="border-black w-90 p-x rounded-3 my-shadow">
+            @if(ViewBag.ErrorMessage != null)
+            {
+                <p class="alert alert-danger">
+                    @ViewBag.ErrorMessage
+                </p>
+            }
+            <h5 class="text-center">Welcome back</h5>
+
+            <form asp-action="Login" method="post" class="">
+                <div class="p-1 m-1">
+                    <label for="username" class="control-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="p-1 m-1">
+                    <label for="password" class="control-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+
+                <input type="submit" value="Login" class="btn btn-primary w-100 m-1">
+            </form>
+        </div>
+    </aside>
+
+</div>
+

@@ -1,0 +1,48 @@
+﻿.table2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    vertical-align: top;
+}
+
+.table2 *{
+    font-size: 0.9rem;
+}
+
+.table2 .table-body, .table2 .table-header {
+    width: inherit;
+    display: grid;
+    /* Define columns with auto sizing - each column takes the width of its largest content */
+    grid-template-columns: repeat(6, auto);
+}
+
+.table-body > .table-row:nth-of-type(odd) {
+    background-color: #f0f0f0;
+}
+
+.table2 .table-row {
+    /* Make each row also use grid with same column structure */
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    height: fit-content;
+    border-bottom: solid 1px black;
+}
+
+.table-head, .table-cell {
+    padding: .5rem .5rem;
+    text-align: left;
+    align-self: center;
+    word-wrap: anywhere;
+}
+
+.table-body .table-row:hover {
+    background-color: #cccaca;
+    cursor: pointer;
+}
+
+.table-row:nth-of-type(2) .table-cell:nth-of-type(2) {
+    /*background-color: #ffda6a;*/
+    /*outline: 1px solid #00da00;*/
+}
