@@ -1,40 +1,90 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PASSIFY.Data;
 using PASSIFY.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace PASSIFY.Controllers
 {
     [Authorize]
     public class ActivitiesController : Controller
     {
-        private readonly PASSIFYContext _context;
         private readonly IConfiguration _configuration;
+        private readonly PASSIFYContext _context;
+        
         private readonly BlobContainerClient _containerClient;
 
-        public ActivitiesController(PASSIFYContext context, IConfiguration configuration)
+        public ActivitiesController(IConfiguration configuration, PASSIFYContext context)
         {
             _context = context;
             _configuration = configuration;
             
             var connectionString = _configuration["AzureStorage"];
             var containerName = "uploads";
-            
             _containerClient = new BlobContainerClient(connectionString, containerName);
-            
+        }
+         // GET: Activities/Create
+        public IActionResult Create()
+        {
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "Title");
+            ViewData["OrganizerId"] = new SelectList(_context.Set<Organizer>(), "OrganizerId", "Name");
+            return View();
         }
 
-        // GET: Activities
-        public async Task<IActionResult> Index()
+        // POST: Activities/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(
+            [Bind("ActivityId,Title,Description,EventStart,EventEnd,OrganizerId,CategoryId,FormFile")]Activity activity)
         {
-            var pASSIFYContext = _context.Activity.Include(a => a.Category).Include(a => a.Organizer);
-            return View(await pASSIFYContext.ToListAsync());
+            activity.Created = DateTime.Now;
+            activity.Modified = DateTime.Now;
+
+            //Validate form input
+            if (ModelState.IsValid)
+            {
+                
+                if (activity.FormFile != null)
+                {
+                    //
+                    IFormFile fileUpload = activity.FormFile;
+                    
+                    //path to save the file to
+                    string blobName = Guid.NewGuid().ToString() + "_" + fileUpload.FileName;
+
+                    var blobClient = _containerClient.GetBlobClient(blobName);
+                    
+                    using (var stream = fileUpload.OpenReadStream())
+                    {
+                        await blobClient.UploadAsync(stream, new BlobHttpHeaders { ContentType = fileUpload.ContentType });
+                    }
+                    
+                    string blobURL = blobClient.Uri.ToString();
+                    
+                    // Get the URL of the blob file
+                    activity.ImageName = blobURL;
+                }
+
+                //Save to a database
+                _context.Add(activity);
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId", activity.CategoryId);
+            ViewData["OrganizerId"] = new SelectList(_context.Set<Organizer>(), "OrganizerId", "OrganizerId", activity.OrganizerId);
+            return View(activity);
         }
 
         // GET: Activities/Details/5
@@ -56,63 +106,8 @@ namespace PASSIFY.Controllers
 
             return View(activity);
         }
-
-        // GET: Activities/Create
-        public IActionResult Create()
-        {
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "Title");
-            ViewData["OrganizerId"] = new SelectList(_context.Set<Organizer>(), "OrganizerId", "Name");
-            return View();
-        }
-
-        // POST: Activities/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-            [Bind("ActivityId,Title,Description,EventStart,EventEnd,Created,Modified,OrganizerId,CategoryId,Image,EventImageName")]Activity activity)
-        {
-            activity.Created = DateTime.Now;
-            activity.Modified = DateTime.Now;
-
-            //Validate form input
-            if (ModelState.IsValid)
-            {
-                // _context.Add(activity);
-
-                if (activity.EventImage != null)
-                {
-                    //Create unique file name on server
-                    
-                    //
-                    var fileUpload = activity.EventImage;
-                    
-                    //path to save the file to
-                    string blobName = Guid.NewGuid().ToString() + "_" + fileUpload.FileName;
-
-                    var blobClient = _containerClient.GetBlobClient(blobName);
-                    
-                    using (var stream = fileUpload.OpenReadStream())
-                    {
-                        await blobClient.UploadAsync(stream, new BlobHttpHeaders { ContentType = fileUpload.ContentType });
-                    }
-                    // Get the URL of the blob file
-                    activity.EventImageName = blobClient.Uri.ToString();
-                }
-
-                //Save to database
-                _context.Add(activity);
-
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId", activity.CategoryId);
-            ViewData["OrganizerId"] = new SelectList(_context.Set<Organizer>(), "OrganizerId", "OrganizerId", activity.OrganizerId);
-            return View(activity);
-        }
-
+        
+        
         // GET: Activities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -149,6 +144,16 @@ namespace PASSIFY.Controllers
 
             if (ModelState.IsValid)
             {
+                if(activity.FormFile != null) {
+
+                    // determine new filename
+
+                    // set the new filename in the db record
+
+                    // upload the new file
+
+                    // delete the old file
+                }
                 try
                 {
                     activity.Modified = DateTime.Now;
@@ -167,7 +172,7 @@ namespace PASSIFY.Controllers
                     }
                 }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
 
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId", activity.CategoryId);
@@ -207,7 +212,7 @@ namespace PASSIFY.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
         private bool ActivityExists(int id)
