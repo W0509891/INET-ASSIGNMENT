@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-let tablerows = document.querySelectorAll("tr[data-title]");
+let tablerows = document.querySelectorAll("tbody tr, #add-section>*>*");
 
 let description = document.querySelectorAll("th:nth-of-type(2), td:nth-of-type(2)");
 
@@ -12,15 +12,29 @@ description.forEach(cell => {
     // console.log(cell.innerHTML, cell.style.width.valueOf());
 });
 
-console.log(description);
-
+// console.log(description);
+console.log(tablerows);
+let url = window.location.href
+console.log(url.split("/"));
+let controller = url.split("/").pop();
+console.log(controller);
 tablerows.forEach(row => {
-    row.addEventListener('click', function() {
-        const title = this.getAttribute('data-title');
+    row.addEventListener('click', function () {
+        // const title = this.getAttribute('data-title');
         const id = this.getAttribute('data-id');
-        const url = this.getAttribute('data-type');
-        // handleTableRowClick(url, id, title);
-        goToPage("Activities","Details",id);
+        // const url = this.getAttribute('data-type');
+        console.log(getPreviousPage());
+        switch (controller) {
+            case "Organizers":
+                goToPage("Organizers", "Details", id);
+                break;
+
+            case "Categories":
+                goToPage("Categories", "Details", id);
+
+            default:
+                goToPage("Activities", "Details", id);
+        }
         storeCookie("lastPage", getPreviousPage())
     });
 });
@@ -37,7 +51,7 @@ function goToPage(controller, action, id) {
     window.location.href = page;
 }
 
-function storeCookie(name, value){
+function storeCookie(name, value) {
     document.cookie = `${name}=${value}; path=/`;
 }
 

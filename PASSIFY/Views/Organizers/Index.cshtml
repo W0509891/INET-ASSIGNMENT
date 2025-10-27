@@ -21,7 +21,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr data-id="@item.OrganizerId">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
