@@ -5,9 +5,13 @@ namespace PASSIFY.Controllers;
 
 public class ExtraController : Controller
 {
+    private string _lastpage;
+    
+    
     // GET
     public IActionResult LastPage()
     {
-        return Redirect(Request.Cookies["LastPage"]);
+        Console.WriteLine(Request.Cookies["LastPage"]);
+        return Redirect(Request.Cookies["LastPage"] ?? throw new InvalidOperationException());
     }
 }

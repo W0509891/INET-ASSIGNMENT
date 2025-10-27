@@ -11,7 +11,7 @@
     <h1 class="display-4">Welcome <span class="text-secondary">@User.Identity.Name</span> to your Passify Dashboard</h1>
 </div>
 
-<section class="d-flex justify-content-end p-1">
+<section class="d-flex justify-content-end p-1" id="add-section">
     <div class="d-flex justify-content-between">
         @* Add event *@
         <a asp-controller="Activities" asp-action="Create" class="m-2 link-dark text-decoration-none">
@@ -37,7 +37,7 @@
         <thead class="bg-body-secondary">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.EventImage)
+                @Html.DisplayNameFor(model => model.FormFile)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
@@ -65,13 +65,13 @@
             {
                 <tr data-title="@item.Title" data-id="@item.ActivityId" class="pe-auto align-middle">
                     <td class="">
-                        @if(item.EventImage == null)
+                        @if(item.FormFile == null)
                         {
-                            <img src="@Url.Content("~/assets/photos/wallpaperflare.com_wallpaper.JPG")" alt="" class="img-thumb">
+                            <img src="@Url.Content("~/assets/photos/placeholder.jpg")" alt="" class="img-thumb">
                         }
                         else
                         {
-                            <img src="@Url.Content("~/assets/photos/" + item.EventImageName)" alt="" class="img-thumb">
+                            <img src="@Url.Content("~/assets/photos/" + item.ImageName)" alt="" class="img-thumb">
 
                         }
 

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
     var imgWidth = 30;
     //Used to ignore certain fields from displaying in the details view.
-    var ignore = new List<string> { "ActivityId", "EventImage", "EventImageName", "OrganizerId", "CategoryId" };
+    var ignore = new List<string> { "ActivityId", "FormFile", "ImageName", "OrganizerId", "CategoryId" };
 }
 
 <div>
@@ -55,7 +55,7 @@
                         <h5>Activity Image</h5>
                     </div>
                     <div class="card-body text-center">
-                        <img src="@Url.Content("~/assets/photos/wallpaperflare.com_wallpaper.jpg")" alt="@Model?.Title"
+                        <img src="@Url.Content("~/assets/photos/placeholder.jpg")" alt="@Model?.Title"
                              class="img-fluid rounded"
                              style="max-height: 400px; object-fit: cover;">
                     </div>

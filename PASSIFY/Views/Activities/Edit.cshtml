@@ -48,9 +48,9 @@
                 </div>
 
                 <div class="form-group mb-3">
-                    <label asp-for="EventImage" class="form-label"></label>
-                    <input type="file" asp-for="EventImage" class="form-control"/>
-                    <span asp-validation-for="EventImage" class="text-danger"></span>
+                    <label asp-for="FormFile" class="form-label"></label>
+                    <input type="file" asp-for="FormFile" class="form-control"/>
+                    <span asp-validation-for="FormFile" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mb-3">
@@ -67,7 +67,7 @@
                     <h5>Activity Image</h5>
                 </div>
                 <div class="card-body text-center">
-                    <img src="@Url.Content("~/assets/photos/" + Model.EventImageName)" alt="@Model?.Title"
+                    <img src="@Url.Content("~/assets/photos/" + Model.ImageName)" alt="@Model?.Title"
                          class="img-fluid rounded"
                          style="max-height: 400px; object-fit: cover;">
                 </div>
@@ -79,7 +79,7 @@
 
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Home" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
