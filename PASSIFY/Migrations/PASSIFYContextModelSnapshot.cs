@@ -43,11 +43,12 @@ namespace PASSIFY.Migrations
                     b.Property<DateTime>("EventEnd")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EventImageName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("EventStart")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
