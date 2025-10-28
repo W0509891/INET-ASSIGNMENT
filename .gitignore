@@ -6,3 +6,5 @@
 *obj/
 *.vs/
 *.idea/
+/PASSIFY/script.sql
+/PASSIFY/secrets.json - Shortcut.lnk
