@@ -24,7 +24,7 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Login(string username, string password)
     {
-        if (username == _configuration["username"] && password == _configuration["password"])
+        if (username == _configuration["account_username"] && password == _configuration["account_password"])
         {
             // Create a list of claims identifying the user
             var claims = new List<Claim>
