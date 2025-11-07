@@ -1,0 +1,19 @@
+{
+  "name": "passify-web-api",
+  "version": "1.0.0",
+  "description": "Passify Web api for user endpoint access",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Hello World\"",
+    "start": "node server.js",
+    "start-live": "node server.js"
+  },
+  "author": "Dasil Adam",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mssql": "^12.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
