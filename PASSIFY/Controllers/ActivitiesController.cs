@@ -98,6 +98,7 @@ namespace PASSIFY.Controllers
             var activity = await _context.Activity
                 .Include(a => a.Category)
                 .Include(a => a.Organizer)
+                .Include(a => a.Purchases)
                 .FirstOrDefaultAsync(m => m.ActivityId == id);
             if (activity == null)
             {
@@ -105,6 +106,26 @@ namespace PASSIFY.Controllers
             }
 
             return View(activity);
+        }
+        
+        // GET: Activities/Details/5/Purchases
+        [HttpGet("Activities/Details/{id}/Purchases")]
+        public async Task<IActionResult> ActivityPurchases(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var purchases = await _context.Activity
+                .Include(a => a.Purchases)
+                .FirstOrDefaultAsync(m => m.ActivityId == id);
+            if (purchases == null)
+            {
+                return NotFound();
+            }
+
+            return View(purchases);
         }
         
         

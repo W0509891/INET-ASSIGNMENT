@@ -36,6 +36,9 @@
                                 case "Title":
                                     @Html.DisplayFor(model => model.Title)
                                     break;
+                                case "Purchases":
+                                    <a asp-action="ActivityPurchases" asp-route-id="@Model.ActivityId" asp-controller="Activities">@Html.DisplayFor(model => model.Purchases!.Count)</a>
+                                    break;
                                 default:
                                     @Html.Display(item.Name)
                                     break;
