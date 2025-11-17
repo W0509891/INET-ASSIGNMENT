@@ -8,3 +8,8 @@
 *.idea/
 /PASSIFY/script.sql
 /PASSIFY/secrets.json - Shortcut.lnk
+node_modules/
+package-lock.json
+.env
+*HTTP_REQS/
+*.sql
