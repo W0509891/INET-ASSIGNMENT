@@ -12,9 +12,15 @@ app.use(express.static('public'));
 //Routes (API endpoints)
 app.use("/api/activities", router)
 
+
+//Routes (HTML endpoints)
+
+//Home Page
 app.get('/', (req, res) => {
     res.send('Home Page!');
 });
+
+//--------------------Test Routes----------------------------------//
 
 app.get('/hello', (req, res) => {
     res.send('Hello Express!');

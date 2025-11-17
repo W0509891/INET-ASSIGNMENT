@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Hello World\"",
     "start": "node server.js",
-    "start-live": "node server.js"
+    "start-live": "nodemon server.js"
   },
   "author": "Dasil Adam",
   "license": "ISC",
