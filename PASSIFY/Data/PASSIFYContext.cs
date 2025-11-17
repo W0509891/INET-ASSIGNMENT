@@ -17,5 +17,6 @@ namespace PASSIFY.Data
         public DbSet<PASSIFY.Models.Activity> Activity { get; set; } = default!;
         public DbSet<PASSIFY.Models.Category> Category { get; set; } = default!;
         public DbSet<PASSIFY.Models.Organizer> Organizer { get; set; } = default!;
+        public DbSet<PASSIFY.Models.Purchase> Purchase { get; set; } = default!;
     }
 }

@@ -1,4 +1,5 @@
-﻿@model PASSIFY.Models.Activity
+﻿@using Microsoft.IdentityModel.Tokens
+@model PASSIFY.Models.Activity
 
 @{
     ViewData["Title"] = "Details";
@@ -36,6 +37,10 @@
                                 case "Title":
                                     @Html.DisplayFor(model => model.Title)
                                     break;
+                                case "Purchases":
+                                    <a asp-action="ActivityPurchases" asp-route-id="@Model.ActivityId"
+                                       asp-controller="Activities">@Html.DisplayFor(model => model.Purchases!.Count)</a>
+                                    break;
                                 default:
                                     @Html.Display(item.Name)
                                     break;
@@ -55,9 +60,18 @@
                         <h5>Activity Image</h5>
                     </div>
                     <div class="card-body text-center">
-                        <img src="@Url.Content("~/assets/photos/placeholder.jpg")" alt="@Model?.Title"
-                             class="img-fluid rounded"
-                             style="max-height: 400px; object-fit: cover;">
+                        @if (string.IsNullOrWhiteSpace(Model.ImageName))
+                        {
+                            <img src="@Url.Content("~/assets/photos/placeholder.jpg")" alt="@Model?.Title"
+                                 class="img-fluid rounded"
+                                 style="max-height: 400px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content(Model.ImageName)" alt="@Model.Title" 
+                                 class="img-fluid rounded"
+                                 style="max-height: 400px; object-fit: cover;">
+                        }
                     </div>
                 </div>
             </div>
@@ -79,7 +93,7 @@
             </a>
 
             <a asp-controller="Extra" asp-action="LastPage">
-                
+
                 <img src="~/assets/svg/back.svg"
                      width=@string.Concat(imgWidth + 20, "px")
                      alt="Back">

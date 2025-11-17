@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PASSIFY.Data;
 
@@ -11,9 +12,11 @@ using PASSIFY.Data;
 namespace PASSIFY.Migrations
 {
     [DbContext(typeof(PASSIFYContext))]
-    partial class PASSIFYContextModelSnapshot : ModelSnapshot
+    [Migration("20251113225952_AddedPurchases")]
+    partial class AddedPurchases
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

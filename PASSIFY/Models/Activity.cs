@@ -17,7 +17,7 @@ public class Activity
     public string Description { get; set; } = string.Empty;
 
     //Name of Image on server
-    public string ImageName { get; set; } = string.Empty;
+    public string? ImageName { get; set; } = string.Empty;
     
     [Display(Name = "Start"),
      DisplayFormat(DataFormatString = DateFormat)]
@@ -43,6 +43,7 @@ public class Activity
     // ==== Navigation Properties ==== //
     public Organizer? Organizer { get; set; }
     public Category? Category { get; set; }
+    public List<Purchase>? Purchases { get; set; }
     
     [NotMapped]
     [Display(Name = "Image")]

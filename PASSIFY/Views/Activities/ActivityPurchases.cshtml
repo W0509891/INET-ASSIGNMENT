@@ -1,0 +1,47 @@
+﻿@model PASSIFY.Models.Activity
+
+@{
+    ViewData["Title"] = $"Purchases for {Model.Title}";
+}
+
+<div>
+    <h4>Purchases for @Model.Title</h4>
+    <hr />
+    
+    @if (Model.Purchases != null && Model.Purchases.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Purchase ID</th>
+                <th>No. Of Tickets</th>
+                <th>Email</th>
+                <th>CreditCard CVV</th>
+                <th>CreditCard EXP</th>
+                <!-- More colums if needed -->
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var purchase in Model.Purchases)
+            {
+                <tr>
+                    <td>@purchase.PurchaseId</td>
+                    <td>@purchase.NoOfTickets</td>
+                    <td>@purchase.CustomerEmail</td>
+                    <td>@purchase.CreditCardCvv</td>
+                    <td>@purchase.CreditCardExp</td>
+                    <!-- more fields if needed-->
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No purchases found for this activity.</p>
+    }
+    
+    <div class="mt-3">
+        <a asp-action="Details" asp-route-id="@Model.ActivityId" class="btn btn-secondary">Back to Details</a>
+    </div>
+</div>

@@ -65,13 +65,13 @@
             {
                 <tr data-title="@item.Title" data-id="@item.ActivityId" class="pe-auto align-middle">
                     <td class="">
-                        @if(item.FormFile == null)
+                        @if(string.IsNullOrWhiteSpace(item.ImageName))
                         {
                             <img src="@Url.Content("~/assets/photos/placeholder.jpg")" alt="" class="img-thumb">
                         }
                         else
                         {
-                            <img src="@Url.Content("~/assets/photos/" + item.ImageName)" alt="" class="img-thumb">
+                            <img src="@Url.Content(item.ImageName)" alt="" class="img-thumb">
 
                         }
 
