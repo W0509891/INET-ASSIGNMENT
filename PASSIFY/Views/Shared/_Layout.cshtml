@@ -14,38 +14,36 @@
 
 
 <div class="d-flex">
-@* todo: implement side bar nav *@
+    @*side bar nav *@
     <!--Sidebar-->
-    <aside class="d-flex flex-column flex-shrink-0 test-sidebar">
+    <aside class="d-flex flex-column flex-shrink-0 test-sidebar min-vh-100 border-end">
         @*Main Logo*@
-        <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip"
-           data-bs-placement="right" data-bs-original-title="Icon-only">
-            Passify
-        </a>
+        <a class="d-block p-3 link-dark text-decoration-none border-bottom " title="" data-bs-toggle="tooltip"
+           data-bs-placement="right" data-bs-original-title="Icon-only" asp-area="" asp-controller="Home"
+           asp-action="Index">PASSIFY</a>
+
 
         @*List of Nav links and their logos*@
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
             @*Item 1*@
-            <li class="nav-item">
-                <a href="#" class="nav-link active py-3 border-bottom" aria-current="page" title=""
-                   data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-                    <img src="assets/svg/event.svg" alt="" width="30" height="30" class="mb-2"/>
+            <li class="">
+                <a asp-controller="Organizers" asp-action="Index"
+                   class="nav-link link-dark text-decoration-none py-3 border-bottom d-inline-flex align-items-center flex-column" title=""
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="right" data-bs-original-title="Dashboard">
+                    <img src="~/assets/svg/organizer.svg" alt="" width="30" height="30" class="mb-2"/>
+                    <span>Organizers</span>
                 </a>
             </li>
 
             @*Item 2*@
             <li>
-                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
-                   data-bs-placement="right" data-bs-original-title="Dashboard">
-                    <img src="assets/svg/organizer.svg" alt="" width="30" height="30" class="mb-2"/>
-                </a>
-            </li>
-
-            @*Item 3*@
-            <li>
-                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                <a asp-action="Index" asp-controller="Categories"
+                   class="nav-link link-dark text-decoration-none py-3 border-bottom d-inline-flex align-items-center flex-column" title=""
+                   data-bs-toggle="tooltip"
                    data-bs-placement="right" data-bs-original-title="Orders">
-                    <img src="assets/svg/cat_tag.svg" alt="" width="30" height="30" class="mb-2"/>
+                    <img src="~/assets/svg/cat_tag.svg" alt="" width="30" height="30" class="mb-2"/>
+                    <span>Categories</span>
                 </a>
             </li>
 
@@ -57,7 +55,7 @@
     <div class="flex-grow-1">
         <!--Start Navbar-->
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom mb-3">
             <div class="container-fluid">
                 <div id="for-end" class="navbar-collapse collapse d-sm-inline-flex">
                     @*Login/Logout*@
@@ -87,8 +85,8 @@
             </div>
         </nav>
         <!--End Navbar-->
-        
-        <div class="container">
+
+        <div class="container mt-1">
 
             <main role="main" class="pb-3">
                 @RenderBody()
