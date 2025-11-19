@@ -11,71 +11,114 @@
     <link rel="stylesheet" href="~/PASSIFY.styles.css" asp-append-version="true"/>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PASSIFY</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    
-                    <!--Created -->
 
-                    @* Activities *@
-                    @* <li class="nav-item"> *@
-                    @*     <a class="nav-link text-dark" asp-area="" asp-controller="Activities" *@
-                    @*        asp-action="Index">Events</a> *@
-                    @* </li> *@
 
-                    @* Categories*@
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
-                    </li>
+<div class="d-flex">
+@* todo: implement side bar nav *@
+    <!--Sidebar-->
+    <aside class="d-flex flex-column flex-shrink-0 test-sidebar">
+        @*Main Logo*@
+        <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip"
+           data-bs-placement="right" data-bs-original-title="Icon-only">
+            Passify
+        </a>
 
-                    @* Oragnizers *@
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Organizers" asp-action="Index">Organizers</a>
-                    </li>
-                </ul>
+        @*List of Nav links and their logos*@
+        <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+            @*Item 1*@
+            <li class="nav-item">
+                <a href="#" class="nav-link active py-3 border-bottom" aria-current="page" title=""
+                   data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+                    <img src="assets/svg/event.svg" alt="" width="30" height="30" class="mb-2"/>
+                </a>
+            </li>
 
-                @*Login/Logout*@
+            @*Item 2*@
+            <li>
+                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                   data-bs-placement="right" data-bs-original-title="Dashboard">
+                    <img src="assets/svg/organizer.svg" alt="" width="30" height="30" class="mb-2"/>
+                </a>
+            </li>
 
-                <ul class="navbar-nav">
-                    @if (User.Identity != null)
-                    {
-                        
-                        @if (User.Identity.IsAuthenticated)
+            @*Item 3*@
+            <li>
+                <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip"
+                   data-bs-placement="right" data-bs-original-title="Orders">
+                    <img src="assets/svg/cat_tag.svg" alt="" width="30" height="30" class="mb-2"/>
+                </a>
+            </li>
+
+            @*Copy item n if extra needed*@
+        </ul>
+    </aside>
+    <!--End Sidebar-->
+
+    <div class="flex-grow-1">
+        <!--Start Navbar-->
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PASSIFY</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <!--Created -->
+
+                        @* Categories*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
+                        </li>
+
+                        @* Oragnizers *@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Organizers" asp-action="Index">Organizers</a>
+                        </li>
+                    </ul>
+
+                    @*Login/Logout*@
+
+                    <ul class="navbar-nav">
+                        @if (User.Identity != null)
                         {
-                            
-                        <li class="navbar-text pe-3">Hello, @User.Identity.Name</li>
-                        <li class="nav-item"><a class="nav-link text-dark" asp-action="Logout" asp-controller="Account">Logout</a></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="navbar-text pe-3">Hello, @User.Identity.Name</li>
+                                <li class="nav-item"><a class="nav-link text-dark" asp-action="Logout"
+                                                        asp-controller="Account">Logout</a></li>
+                            }
                         }
-                    }
-                    else
-                    {
-                    <li class="nav-item"><a class="nav-link text-dark" asp-action="Login"asp-controller="Account">Login</a></li>
-                        
-                    }
-                </ul>
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link text-dark" asp-action="Login"
+                                                    asp-controller="Account">Login</a></li>
+                        }
+                    </ul>
+                </div>
+
+                @*Search Bar cancelled for now*@
+                @* <form class="form-inline my-2 my-lg-0"> *@
+                @*     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> *@
+                @*     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> *@
+                @* </form> *@
             </div>
-            
-            @*Search Bar cancelled for now*@
-            @* <form class="form-inline my-2 my-lg-0"> *@
-            @*     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> *@
-            @*     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> *@
-            @* </form> *@
+        </nav>
+        <!--End Navbar-->
+        
+        <div class="container">
+
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </nav>
-</header>
-<div class="container">
-    @*todo: implement side bar nav*@
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
+    </div>
+
+
 </div>
 
 <footer class="border-top footer text-muted">
