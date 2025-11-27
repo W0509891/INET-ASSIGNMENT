@@ -16,9 +16,9 @@
 <div class="d-flex">
     @*side bar nav *@
     <!--Sidebar-->
-    <aside class="d-flex flex-column flex-shrink-0 test-sidebar min-vh-100 border-end">
+    <aside class="position-fixed z-1 d-flex flex-column flex-shrink-0 test-sidebar min-vh-100 border-end">
         @*Main Logo*@
-        <a class="d-block p-3 link-dark text-decoration-none border-bottom " title="" data-bs-toggle="tooltip"
+        <a class="d-block p-3 link-dark text-decoration-none border-bottom text-center" title="" data-bs-toggle="tooltip"
            data-bs-placement="right" data-bs-original-title="Icon-only" asp-area="" asp-controller="Home"
            asp-action="Index">PASSIFY</a>
 
@@ -55,7 +55,7 @@
     <div class="flex-grow-1">
         <!--Start Navbar-->
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom mb-3">
+        <nav class="position-sticky top-0 navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom mb-3">
             <div class="container-fluid">
                 <div id="for-end" class="navbar-collapse collapse d-sm-inline-flex">
                     @*Login/Logout*@
@@ -97,11 +97,6 @@
 
 </div>
 
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2025 - PASSIFY - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    </div>
-</footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
