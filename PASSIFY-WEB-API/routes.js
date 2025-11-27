@@ -71,4 +71,24 @@ router.get('/:id/purchases', async (req, res) => {
         res.send(result.recordsets[0])
     }
 })
+
+
+router.post('/', async (req, res) => {
+    const event_id = req.body.eid.toString()
+    const no_of_tickets = req.body.ntickets.toString()
+    const email = req.body.email.toString()
+    const ccx = req.body.ccexp.toString()
+    const ccv = req.body.cccvv.toString()
+
+    await sql.connect(dbconnstr)
+
+    const result = await sql.query(
+        `insert into dbo.[Purchase]  (NoOfTickets, CustomerEmail, CreditCardExp, CreditCardCvv, ActivityId)
+        values (${no_of_tickets}, '${email}', '${ccx}', ${ccv}, ${event_id})`
+    )
+
+    console.log(result)
+    // res.send("Success")
+})
+
 export default router;
