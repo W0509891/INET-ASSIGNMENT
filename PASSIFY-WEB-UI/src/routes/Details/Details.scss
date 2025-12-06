@@ -1,0 +1,132 @@
+// Page container
+.details-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+
+  //nested
+  // back link
+  .details-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  // Main content card
+  .details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #FFFFFF07;
+    border: 1px solid #FFFFFF14;
+    border-radius: 14px;
+    padding: 20px;
+
+
+    .details-title {
+      margin: 0;
+      text-align: center;
+      font-size: 1.6rem;
+      color: #f0f0f0;
+    }
+
+    .details-hero {
+      width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    // Additional info layout
+    .details-additional {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 20px;
+      width: min(800px, 100%);
+      margin: 0 auto;
+
+      > div {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        padding: 8px 0;
+        border-bottom: 1px solid #FFFFFF14;
+      }
+
+
+      p {
+        margin: 0;
+      }
+
+      p:first-of-type {
+        text-align: left;
+        color: #ff8407;
+        font-weight: 600;
+        min-width: 96px;
+      }
+    }
+
+  }
+}
+
+// CTA area under the card
+.details-cta {
+  display: flex;
+  justify-content: center;
+  padding: 8px 16px 24px;
+}
+
+// Button styles copied from bootsrtap as custom style was being overidden
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #111;
+  background-color: #e9ecef;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+
+}
+
+.btn-sm {
+  padding: 6px 10px;
+  font-size: .9rem;
+  border-radius: 6px;
+}
+
+
+.btn-outline-light {
+  color: #f8f9fa;
+  background-color: transparent;
+  border-color: #ced4da;
+
+  &:hover {
+    color: #111;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+  }
+}
+
+.btn-ticket {
+  color: #fff;
+  background: #319197;
+  border: none;
+
+
+  &:hover {
+    color: #aa9d9d;
+    filter: brightness(1.08);
+    box-shadow: 0 0 24px rgb(49, 144, 150);
+  }
+
+}
