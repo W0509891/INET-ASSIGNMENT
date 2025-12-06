@@ -1,0 +1,66 @@
+@mixin base-style{
+  text-align: left;
+  //height: 60px;
+  padding: 8px;
+  border-bottom: 1px dotted #ffffff;
+  background-color: #213547;
+}
+
+
+.search-result-item{
+  @include base-style;
+  display: grid;
+  gap: 0 5px;
+  grid-template-columns: 60px 1fr;
+  grid-template-areas: "image title"
+                        "image description";
+
+  &:hover{
+    background-color: #1a1a1a;
+  }
+
+  .search-result-image{
+    grid-area: image;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img{
+      width: 80%;
+      border-radius: 3px;
+      object-fit: cover;
+    }
+  }
+
+  .search-result-title {
+    grid-area: title;
+    align-self: start; // Align text to bottom of the first row
+
+    p {
+      margin: 0;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+  }
+
+  .search-result-description {
+    grid-area: description;
+    align-self: start; // Align text to top of the second row
+
+    p {
+      margin: 4px 0 0 0;
+      font-size: 0.9rem;
+      color: #b0b0b0;
+      white-space: wrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.search-result-item-none{
+@include base-style;
+  text-align: center;
+}
