@@ -1,0 +1,32 @@
+.search-bar-container{
+  position: relative;
+  width: 250px;
+
+  input {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input::placeholder{
+
+  }
+
+  input:focus {
+    background-color: #aa9d9d;
+  }
+}
+
+.search-results {
+  position: absolute;
+  //top: 100%;
+  //left: 0;
+  width: 100%;
+  border-top: none;
+  z-index: 1000;   // Ensure it sits on top of the navbar and other content
+  max-height: 400px; // Prevent the list from getting too long
+  overflow-y: auto;  // Add scroll if needed
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3); // Add shadow for depth
+}
