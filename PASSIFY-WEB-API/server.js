@@ -1,5 +1,6 @@
 import express from "express";
 import router from "./routes.js";
+import cors from "cors";
 
 const port = 3000;
 const app = express();
@@ -8,6 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(cors());
 
 //Routes (API endpoints)
 app.use("/api/activities", router)
@@ -19,6 +21,10 @@ app.use("/api/activities", router)
 app.get('/', (req, res) => {
     res.send('Home Page!');
 });
+
+app.get('/form', (req, res) => {
+    res.redirect('/form.html');
+})
 
 //--------------------Test Routes----------------------------------//
 
@@ -34,4 +40,5 @@ app.get('/goodbye', (req, res) => {
 // Start server
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
+    console.log(`View: http://localhost:${port}`);
 });

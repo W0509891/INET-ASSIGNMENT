@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PASSIFY.Data;
 using PASSIFY.Models;
@@ -22,19 +23,30 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var pASSIFYContext = _context.Activity
-            .Include(a => a.Category)
-            .Include(a => a.Organizer);
-            
-        return View(await pASSIFYContext.ToListAsync());
+        while (await _context.Database.CanConnectAsync())
+        {
+            try
+            {
+                var pASSIFYContext = _context.Activity
+                    .Include(a => a.Category)
+                    .Include(a => a.Organizer);
+                return View(await pASSIFYContext.ToListAsync());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        return View("Loading");
     }
-    
+
     public async Task<IActionResult> Index_old()
     {
         var pASSIFYContext = _context.Activity
             .Include(a => a.Category)
             .Include(a => a.Organizer);
-            
+
         return View(await pASSIFYContext.ToListAsync());
     }
 
@@ -46,6 +58,7 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return base.View(new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return base.View(new ErrorViewModel
+            { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

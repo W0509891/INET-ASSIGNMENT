@@ -1,0 +1,22 @@
+.event-grid-container{
+  display: flex;
+  flex-wrap: wrap;
+  padding: .5em;
+  gap: .5em;
+  justify-content: center;
+
+
+  #blurry{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &:hover {
+      //background-color: #1a1a1a;
+      transition: ease-in 0.1s;
+      filter: blur(10px);
+    }
+
+    flex-grow: 1;
+    //outline: 1px solid white;
+  }
+}

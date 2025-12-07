@@ -1,0 +1,93 @@
+.event-grid-item {
+  position: relative;
+  padding: 1em;
+
+  //Link
+  a {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #cccccc;
+
+
+    .image-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+      img {
+        display: block;
+        width: 300px;
+        height: auto;
+        transition: filter 200ms ease, transform 200ms ease, opacity 200ms ease;
+        transform-origin: center;
+      }
+
+      .event-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        opacity: 0;
+        transition: opacity 200ms ease;
+        pointer-events: none;
+
+
+        .overlay-content {
+          backdrop-filter: none; // text itself should not blur
+          text-align: left;
+          color: #ffffff;
+          max-width: 90%;
+          line-height: 1.35;
+          text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .overlay-desc {
+          font-size: 0.9rem;
+          opacity: 0.95;
+          margin-bottom: 6px;
+        }
+
+        .overlay-meta {
+          font-size: 0.85rem;
+          opacity: 0.95;
+
+          span {
+            opacity: 0.85;
+            font-weight: 600;
+          }
+        }
+
+        .overlay-hint {
+          font-size: 0.85rem;
+          opacity: 0.9;
+        }
+      }
+
+      &:hover img {
+        filter: blur(6px) brightness(0.85);
+        transform: scale(1.02);
+      }
+
+      &:hover .event-overlay {
+        opacity: 1;
+      }
+    }
+  }
+
+}
+
+// caption under the image
+.event-card-text {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #e6e6e6;
+  text-align: center;
+}
+
+

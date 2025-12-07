@@ -64,7 +64,7 @@
             @foreach (var item in Model)
             {
                 <tr data-title="@item.Title" data-id="@item.ActivityId" class="pe-auto align-middle">
-                    <td class="">
+                    <td class="d-flex justify-content-center">
                         @if(string.IsNullOrWhiteSpace(item.ImageName))
                         {
                             <img src="@Url.Content("~/assets/photos/placeholder.jpg")" alt="" class="img-thumb">

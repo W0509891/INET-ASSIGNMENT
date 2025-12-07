@@ -1,0 +1,47 @@
+$debugoutline1: 1px solid black;
+$debugoutline2: 1px solid red;
+$debugoutline3: 1px solid blue;
+$hovercolor: #acacac;
+
+
+.navbar-container {
+  position: relative;
+  top: 0;
+  width: 100%;
+  margin-bottom: 1em;
+
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    background-color: #6a6363;
+
+
+    .leftend {
+      padding: 1em;
+
+      :nth-child(n) {
+        color: white;
+
+        //margin-right: 1em;
+        padding: 1em;
+      }
+
+      :nth-child(n):hover {
+        color: $hovercolor;
+      }
+    }
+
+    .middle {
+      padding: 1em;
+    }
+
+    .rightend {
+      margin-right: 1em;
+      padding: 1em;
+    }
+  }
+}
+

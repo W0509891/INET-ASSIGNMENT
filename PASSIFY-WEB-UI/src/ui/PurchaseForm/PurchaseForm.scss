@@ -1,0 +1,90 @@
+.purchase-form-container {
+  display: flex;
+  justify-content: center;
+  //outline: #ff0000 solid 1px;
+
+  > div {
+    //outline: #ff8407 solid 1px;
+    background-color: #262525;
+    padding: 3em;
+    box-shadow: #1a1a1a 10px 10px;
+    border-radius: 10px;
+    width: 25%;
+  }
+
+  .formfieldgroup {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    gap: 10px;
+
+    label {
+
+      text-align: justify;
+      width: 70px;
+      flex-shrink: 0;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &:focus {
+        outline: none;
+      }
+
+    }
+
+    span {
+      color: #dc3545 !important;
+    }
+
+  }
+
+  button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, outline-color 1s, transform 0.1s;
+
+    &:not(.btn-after, .loading-button) {
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 6px;
+
+      &:hover {
+        outline: 3px solid #4CAF50;
+        background-color: hsl(var(--primary) / 0.9);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+
+    .loading-button {
+      background-color: #3b5c42;
+      width: auto;
+      transition: width 1s, ease-in;
+
+      &:hover {
+        outline: none;
+      }
+    }
+
+
+    .btn-after {
+      background-color: #c65a1b;
+      border-color: #ced4da;
+
+      &:hover {
+        color: #111;
+        background-color: #ff6e18;
+        border-color: #f8f9fa;
+      }
+    }
+  }
