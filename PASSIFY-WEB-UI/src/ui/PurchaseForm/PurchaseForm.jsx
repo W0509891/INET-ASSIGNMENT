@@ -34,6 +34,25 @@ function PurchaseForm(props) {
         setInput(e.target.value)
     }
 
+    function createTicket(Activity) {
+        if (Activity.ImageName === null || Activity.ImageName === " ") {
+            Activity.ImageName = "../../../../PASSIFY/wwwroot/assets/photos/placeholder-square.jpg"
+        }
+
+        let list = [];
+        let existingPurchases = sessionStorage.getItem("purchases")
+
+        if (existingPurchases !== null) {
+            console.log("Item found in session storage. Adding to list.")
+            list = JSON.parse(existingPurchases)
+        }
+
+        list.push(Activity)
+        let s = new Set(list)
+        list = [...s]
+        sessionStorage.setItem("purchases", JSON.stringify(list))
+    }
+
     // let ticketFieldValid, emailFieldValid, cardexp, cvvFieldValid = false
 
     // function validateField(e) {
@@ -96,7 +115,26 @@ function PurchaseForm(props) {
 
 
         if (res.status === 200) {
-            setIsLoading(false)
+
+            let req2 = await fetch(`${apiUrl}/createticket?event_id=${e.event_id}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            let res2 = await req2.json()
+
+            console.log(res2)
+
+            if(res2.status === 200){
+                createTicket(res2.result)
+                setIsLoading(false)
+            }
+            else{
+                alert("Error creating ticket")
+            }
+
+
         }
 
         // } else {
@@ -119,9 +157,9 @@ function PurchaseForm(props) {
 
                     <div className={"formfieldgroup"}>
                         <label>Tickets</label>
-                        <input type="number" name="tickets"
+                        <input type="number" name="tickets" max={10} placeholder={"Maximum per purchase is 10"}
                                style={{borderColor: errors.tickets ? "#ff0000" : "#cccccc"}}
-                               {...register("tickets", {required: true, pattern: tregex})}/>
+                               {...register("tickets", {max: 10, required: true, pattern: tregex})}/>
 
 
                     </div>
@@ -151,9 +189,9 @@ function PurchaseForm(props) {
 
                     {isLoaing === null ? <button>Purchase</button> :
                         isLoaing ? <button className={"loading-button"}><LoadingIcon/></button> :
-                            <button onClick={event => {event.preventDefault()}}>
-                                <Link to={"/tickets"}>SeeTickets</Link>
-                            </button>
+                            <Link to={"/tickets"}>
+                                <button className={"btn-after btn-outline-light"}>See Tickets</button>
+                            </Link>
                     }
                 </form>
             </div>
