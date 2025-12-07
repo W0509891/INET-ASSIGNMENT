@@ -34,7 +34,7 @@ function Details() {
                 <div className={"details-content"}>
                     <h2 className="details-title">{activity.ActivityName}</h2>
                     <p>{activity.Description}</p>
-                    <img className="details-hero" src={activity.ImageName} alt={activity.ActivityName}/>
+                    <img className="details-hero" src={activity.ImageName || "/placeholder-square.jpg"} alt={activity.ActivityName}/>
 
                     <div className={"details-additional"}>
 

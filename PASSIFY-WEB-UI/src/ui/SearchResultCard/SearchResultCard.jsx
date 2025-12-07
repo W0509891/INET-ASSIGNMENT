@@ -21,7 +21,7 @@ function SearchResultCard(props) {
             <Link to={`/details/${props.ActivityId}`}>
                 <div className={"search-result-item"}>
                     <div className={"search-result-image"}>
-                        <img src={props.ImageName} alt={"Event Image"}/>
+                        <img src={props.ImageName || "/placeholder-square.jpg"} alt={"Event Image"}/>
                     </div>
                     <div className={"search-result-title"}>
                         <p>{props.ActivityName}</p>

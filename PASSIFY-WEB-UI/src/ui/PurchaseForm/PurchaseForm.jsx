@@ -36,7 +36,7 @@ function PurchaseForm(props) {
 
     function createTicket(Activity) {
         if (Activity.ImageName === null || Activity.ImageName === " ") {
-            Activity.ImageName = "../../../../PASSIFY/wwwroot/assets/photos/placeholder-square.jpg"
+            Activity.ImageName = "placeholder-square.jpg"
         }
 
         let list = [];
