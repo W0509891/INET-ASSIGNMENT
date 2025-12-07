@@ -203,6 +203,38 @@ router.get('/search', async (req, res) => {
 
 })
 
+//GET ACTIVITIES For ticket data ()
+router.get('/createticket', async (req, res) => {
+
+    const searchParam = req.query.event_id;
+    await sql.connect(dbconnstr)
+
+    const result = await sql.query(
+        `
+            SELECT Act.[ActivityId],
+                    Act.[Title] AS "ActivityName",
+                   Act.[Description],
+                   Act.[ImageName],
+                   FORMAT(Act.[EventStart], 'MMM dd yyy - HH:mm') as EventStart,
+                FORMAT(Act.[EventEnd], 'MMM dd yyy - HH:mm') as EventEnd
+            from [dbo].[Activity] as Act
+            WHERE ACT.[ActivityId] = '${searchParam}'
+            ORDER BY Act.[EventStart] Asc`
+    )
+
+    if (result.recordsets[0].length < 1) {
+        res.status(404)
+            .send({message: "No activities found"})
+    }
+    else {
+        res.send({message: "Success", status: 200, result: result.recordsets[0][0]})
+        // res.json(result.recordsets[0][0])
+        console.log(result.recordsets[0][0])
+    }
+
+    // console.log(req.query.event_id)
+
+})
 //GET /api/activities/1
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
