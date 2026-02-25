@@ -1,8 +1,22 @@
 import './Ticket.scss'
+import {useEffect, useState} from "react";
+
 
 function Ticket() {
 
-    let ticketData = JSON.parse(sessionStorage.getItem("purchases"))
+    const [tickets, setTickets] = useState(null)
+
+    useEffect(() => {
+        async function getTickets() {
+            const apiUrl = import.meta.env.VITE_API_URL
+            const response = await fetch(`${apiUrl}/tickets`)
+            const data = await response.json()
+            console.log(data)
+            return data
+        }
+        getTickets().then(setTickets)
+    },[])
+
 
     //pulldata from local storage to display data
 
@@ -15,8 +29,8 @@ function Ticket() {
 
             <div className="ticket-container">
 
-                {ticketData.length === 0 && <p>No tickets purchased</p>}
-                {ticketData.length > 0 && ticketData.map((ticket, index) =>
+                {tickets === null && <p>No tickets purchased</p>}
+                {tickets !== null && tickets.map((ticket, index) =>
                     <div className={"ticket-card"} key={index}>
                         <img src={ticket.ImageName} className={"ticket-image"} alt={"Event Cover"}/>
                         {/* Placeholder QR Code API */}
