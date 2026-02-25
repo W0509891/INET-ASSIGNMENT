@@ -34,25 +34,6 @@ function PurchaseForm(props) {
         setInput(e.target.value)
     }
 
-    function createTicket(Activity) {
-        if (Activity.ImageName === null || Activity.ImageName === " ") {
-            Activity.ImageName = "placeholder-square.jpg"
-        }
-
-        let list = [];
-        let existingPurchases = sessionStorage.getItem("purchases")
-
-        if (existingPurchases !== null) {
-            console.log("Item found in session storage. Adding to list.")
-            list = JSON.parse(existingPurchases)
-        }
-
-        list.push(Activity)
-        let s = new Set(list)
-        list = [...s]
-        sessionStorage.setItem("purchases", JSON.stringify(list))
-    }
-
     // let ticketFieldValid, emailFieldValid, cardexp, cvvFieldValid = false
 
     // function validateField(e) {
@@ -112,8 +93,6 @@ function PurchaseForm(props) {
         await new Promise(r => setTimeout(r, 2000));
 
         console.log(res)
-
-
         if (res.status === 200) {
 
             let req2 = await fetch(`${apiUrl}/createticket?event_id=${e.event_id}`, {
@@ -127,19 +106,12 @@ function PurchaseForm(props) {
             console.log(res2)
 
             if(res2.status === 200){
-                createTicket(res2.result)
                 setIsLoading(false)
             }
             else{
                 alert("Error creating ticket")
             }
-
-
         }
-
-        // } else {
-        //     console.log("Form not submitted")
-        // }
     }
 
 

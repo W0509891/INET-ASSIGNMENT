@@ -1,5 +1,6 @@
 import express from 'express';
 import sql from "mssql";
+import {createTicket, getTickets} from "./TicketService.js";
 import 'dotenv/config';
 
 
@@ -156,15 +157,6 @@ router.get('/time', async (req, res) => {
     if (paramsLength > 1) {
 
     }
-    // await sql.connect(dbconnstr)
-    //
-    // const result = await sql.query(
-    //     ``
-    // )
-    //
-    // res.json(result.recordsets[0]);
-    // if(req.query){}
-    // res.redirect("/")
 
 })
 
@@ -228,12 +220,14 @@ router.get('/createticket', async (req, res) => {
     }
     else {
         res.send({message: "Success", status: 200, result: result.recordsets[0][0]})
-        // res.json(result.recordsets[0][0])
-        console.log(result.recordsets[0][0])
+        createTicket(result.recordsets[0][0])
     }
 
-    // console.log(req.query.event_id)
+})
 
+router.get('/tickets', async (req, res) => {
+    const tickets = await getTickets()
+    res.send(tickets)
 })
 //GET /api/activities/1
 router.get('/:id', async (req, res) => {
@@ -296,7 +290,7 @@ router.post('/', async (req, res) => {
     )
 
     res.send("Success")
-    console.log(result)
+    // console.log(result)
 })
 
 router.post('/purchase', async (req, res) => {
@@ -315,7 +309,7 @@ router.post('/purchase', async (req, res) => {
     )
 
     res.send({message: "Success", status: 200})
-    console.log(result)
+    // console.log(result)
 })
 
 
