@@ -17,6 +17,7 @@
     "express": "^5.1.0",
     "mongodb": "^7.1.0",
     "mssql": "^12.1.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "passport-local": "^1.0.0"
   }
 }

@@ -1,6 +1,6 @@
 import express from 'express';
 import sql from "mssql";
-import {createTicket, getTickets} from "./TicketService.js";
+import {createTicket, getTickets} from "../services/TicketService.js";
 import 'dotenv/config';
 
 
