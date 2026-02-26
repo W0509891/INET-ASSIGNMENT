@@ -6,7 +6,7 @@ name: Build and deploy frontend API to Azure Web App
 on:
   push:
     branches:
-      - PASSIFY-API
+      - deployments/PASSIFY-API
   workflow_dispatch:
 
 jobs:
