@@ -6,7 +6,8 @@ import 'dotenv/config';
 const user_router = express.Router();
 
 user_router.get('/login', async (req, res) => {
-    await getUser(req.query.email, req.query.password)
+    console.log(req.query)
+    res.json(await getUser(req.query.email, req.query.password))
 })
 
 user_router.post('/signup', async (req, res) => {
