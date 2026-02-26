@@ -6,7 +6,7 @@ name: Build and deploy frontend UI to Azure Web App
 on:
   push:
     branches:
-      - PASSIFY-USER-UI
+      - deployments/PASSIFY-USER-UI
   workflow_dispatch:
 
 jobs:
