@@ -225,10 +225,6 @@ router.get('/createticket', async (req, res) => {
 
 })
 
-router.get('/tickets', async (req, res) => {
-    const tickets = await getTickets()
-    res.send(tickets)
-})
 //GET /api/activities/1
 router.get('/:id', async (req, res) => {
     const id = req.params.id;

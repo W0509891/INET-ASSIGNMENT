@@ -1,14 +1,20 @@
 import {MongoClient} from 'mongodb'
+import {pullTickets} from "./UserService.js";
 import 'dotenv/config.js'
 
 const client = new MongoClient(process.env.MONGO_CONN)
 
-const getTickets = async (user_email = "example@ec.com") => {
+const getTickets = async (user_email) => {
     try {
+        let document = await pullTickets(user_email)
+
         await client.connect()
         const db = client.db('passify')
-        const query = {}
-        return await db.collection('tickets').find(query).toArray()
+        const collection = db.collection('tickets')
+
+        const query = {_id: {$in: document.tickets}}
+        const userTickets = await collection.find(query).toArray()
+        return userTickets
     }
     catch (e) {
         console.error(e)

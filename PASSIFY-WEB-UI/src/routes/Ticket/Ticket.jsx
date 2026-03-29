@@ -8,8 +8,14 @@ function Ticket() {
 
     useEffect(() => {
         async function getTickets() {
-            const apiUrl = import.meta.env.VITE_API_URL
-            const response = await fetch(`${apiUrl}/tickets`)
+            const apiUrl = import.meta.env.VITE_AUTH_API
+            const response = await fetch(`${apiUrl}/tickets`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+
+            })
             const data = await response.json()
             console.log(data)
             return data

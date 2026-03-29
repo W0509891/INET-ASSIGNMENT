@@ -8,7 +8,7 @@ function Event() {
 
             <p>Hello there, Looking to host an event?</p>
             <p>You would need to create an account with us and we can get you started</p>
-            <a href={"https://www.example.com"} target={"_blank"}>Create and account</a>
+            <Link to={"/auth"}>Login or Create an account</Link>
         </>
     )
 }
