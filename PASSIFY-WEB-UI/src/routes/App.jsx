@@ -5,6 +5,7 @@ import EventCard from "../ui/EventCard/EventCard.jsx";
 
 function App() {
     const [activities, setActivities] = useState([])
+    const [view, setView] = useState('all')
 
     const apiUrl = import.meta.env.VITE_API_URL
 
@@ -20,15 +21,32 @@ function App() {
         getActivities()
     }, [])
 
+    const categories = ['all', ...new Set(activities.map(activity => activity.Category))]
 
-
+    const filteredActivities = activities.filter(activity => {
+        if (view === 'all') {
+            return true
+        } else {
+            return activity.Category === view
+        }
+    })
 
     return (
         <>
+            <div className="view-selector">
+                <label>Sort by: </label>
+                <select value={view} onChange={(e) => setView(e.target.value)}>
+                    {categories.map(category => (
+                        <option key={category} value={category}>
+                            {category.charAt(0).toUpperCase() + category.slice(1)}
+                        </option>
+                    ))}
+                </select>
+            </div>
             <div className="event-grid-container">
                 {
-                    activities.length > 0 && (
-                        activities.map(activity =>(
+                    filteredActivities.length > 0 ? (
+                        filteredActivities.map(activity =>(
                             <EventCard
                                 key={activity.ActivityId}
                                 ActivityId={activity.ActivityId}
@@ -40,6 +58,8 @@ function App() {
                                 Organizer={activity.Organizer}
                             />
                         ))
+                    ) : (
+                        <p>No events found for this view.</p>
                     )
                 }
             </div>
