@@ -1,106 +1,204 @@
-@mixin times{
-  font-family: monospace;
-  font-size: 0.9rem;
-  background-color: #333;
-  //margin: 0 15px 15px 15px;
-  border-radius: 4px;
+$primary: #6366f1;
+$card-bg: #1e293b;
+$text-light: #f8fafc;
+$text-muted: #94a3b8;
+$accent: #ff4907;
+
+@mixin times {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
   color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
+
+.tickets-page {
+  min-height: calc(100vh - 80px);
+  padding: 3rem 1.5rem;
+  color: $text-light;
+
+  .header-section {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .note {
+      color: $text-muted;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+  }
+}
+
 .ticket-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
-  width: 90%;
+  gap: 2rem;
+  width: 100%;
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 0 auto;
+}
+
+.no-tickets {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: $card-bg;
+  border-radius: 20px;
+  border: 2px dashed $text-muted;
+  color: $text-muted;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+
+  p {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
 }
 
 .ticket-card {
   display: grid;
-  // Adjusted columns: Left sidebar (100px) and two equal content columns
-  grid-template-columns: 120px 1fr 1fr;
-  grid-template-rows: auto auto auto auto;
+  grid-template-columns: 140px 1fr;
+  grid-template-rows: auto auto 1fr auto;
   grid-template-areas:
-    "image title title"
-    "image description description"
-    "qr location location"
-    "qr start end";
+    "image title"
+    "image description"
+    "image location"
+    "qr times";
 
-  max-width: 500px;
-  min-height: 200px;
+  width: 100%;
+  max-width: 550px;
+  min-height: 280px;
 
-  background-color: #2a2a2a;
-  border-radius: 12px;
-  border-left: 6px solid #ff4907;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  background-color: $card-bg;
+  border-radius: 20px;
   overflow: hidden;
-  transition: transform 0.2s;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
+    border-color: rgba($primary, 0.3);
   }
 
-  // --- Left Sidebar (Image & QR) ---
-  .ticket-image {
+  // --- Left Sidebar ---
+  .image-section {
     grid-area: image;
-    width: 100%;
-    object-fit: cover;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.2); // Separator between Img and QR
-  }
+    position: relative;
+    overflow: hidden;
 
-  .ticket-qr {
-    grid-area: qr;
-    width: 90%;
-    padding: 5%;
-    background-color: #ffffff;
-    object-fit: contain;
-  }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent);
+    }
 
-  // --- Content Area ---
-  .ticket-title {
-    grid-area: title;
-    font-size: 1.25rem;
-    color: #ffffff;
-    margin: 15px 15px 5px 15px;
-  }
-
-  .ticket-description {
-    grid-area: description;
-    font-size: 0.9rem;
-    color: #b0b0b0;
-    margin: 0 15px 15px 15px;
-    line-height: 1.4;
-  }
-
-  .ticket-location {
-    grid-area: location;
-    font-size: 0.85rem;
-    color: #ff4907; // Accent color
-    font-weight: 600;
-    text-transform: uppercase;
-    margin: 0 15px 5px 15px;
-    display: flex;
-    align-items: center;
-
-    &::before {
-      content: "📍 ";
-      margin-right: 5px;
+    .ticket-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.2);
     }
   }
 
+  .qr-section {
+    grid-area: qr;
+    background: #fff;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  .ticket-start {
-    @include times;
-    grid-area: start;
-   color: #4CAF50;
+    .ticket-qr {
+      width: 100%;
+      max-width: 100px;
+      object-fit: contain;
+    }
   }
 
-  .ticket-end {
-    @include times;
-    grid-area: end;
-    color: #dc3545;
+  // --- Content Area ---
+  .content-section {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 
+    .ticket-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .ticket-description {
+      font-size: 0.95rem;
+      color: $text-muted;
+      margin: 0;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .ticket-location {
+      font-size: 0.85rem;
+      color: $accent;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0;
+      display: flex;
+      align-items: center;
+
+      &::before {
+        content: "📍 ";
+        margin-right: 4px;
+      }
+    }
+  }
+
+  .times-section {
+    grid-area: times;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+    .ticket-start {
+      @include times;
+      color: #4ade80;
+      &::before { content: "Starts"; }
+    }
+
+    .ticket-end {
+      @include times;
+      color: #f87171;
+      &::before { content: "Ends"; }
+    }
   }
 }
