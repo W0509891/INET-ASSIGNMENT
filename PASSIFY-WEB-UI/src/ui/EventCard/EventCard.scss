@@ -1,27 +1,39 @@
 .event-grid-item {
   position: relative;
-  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  }
 
   //Link
-  a {
+  a.event-card-link {
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
     color: #cccccc;
-
+    text-decoration: none;
 
     .image-wrapper {
       position: relative;
       overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      // border-radius: 12px; // moved to parent
+      // box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); // moved to parent
 
       img {
         display: block;
-        width: 300px;
-        height: auto;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: 4 / 3;
         transition: filter 200ms ease, transform 200ms ease, opacity 200ms ease;
         transform-origin: center;
       }
@@ -84,10 +96,12 @@
 
 // caption under the image
 .event-card-text {
-  margin-top: 8px;
-  font-size: 0.95rem;
-  color: #e6e6e6;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
   text-align: center;
+  margin-top: auto;
 }
 
 

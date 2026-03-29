@@ -24,11 +24,8 @@ function App() {
     const categories = ['all', ...new Set(activities.map(activity => activity.Category))]
 
     const filteredActivities = activities.filter(activity => {
-        if (view === 'all') {
-            return true
-        } else {
-            return activity.Category === view
-        }
+        if (view === 'all') return true
+        return activity.Category === view
     })
 
     return (
@@ -63,7 +60,6 @@ function App() {
                     )
                 }
             </div>
-
         </>
     )
 }
