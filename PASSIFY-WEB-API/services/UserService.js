@@ -36,7 +36,24 @@ const pullTickets = async (user_email) => {
     finally {
         await client.close()
     }
+}
 
+export const pushTickets = async (user_email, ticket_id) => {
+    console.log(user_email, ticket_id)
+    try {
+        await client.connect()
+        const db = client.db('passify')
+        const collection = db.collection('users')
+        const filter = {email: user_email}
+        const update = {$addToSet: {tickets: ticket_id}}
+        return await collection.updateOne(filter, update)
+    }
+    catch (e) {
+        console.error(e)
+    }
+    finally {
+        await client.close()
+    }
 }
 const createUser = async (data) => {
     await client.connect()
