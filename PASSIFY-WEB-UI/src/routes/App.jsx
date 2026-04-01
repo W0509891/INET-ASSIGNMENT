@@ -9,10 +9,12 @@ function App() {
     const [view, setView] = useState('all')
     const [currentPage, setCurrentPage] = useState(1)
     const [loading, setLoading] = useState(true)
+    //Pagination count
     const itemsPerPage = 20
 
     const apiUrl = import.meta.env.VITE_API_URL
 
+    //gets all activities from the api
     useEffect(() => {
         const getActivities = async () => {
             setLoading(true)
@@ -37,6 +39,7 @@ function App() {
         setCurrentPage(1)
     }
 
+    //Activity reducer
     const categories = ['all', ...new Set(activities.map(activity => activity.Category))]
 
     const filteredActivities = activities.filter(activity => {
@@ -44,6 +47,7 @@ function App() {
         return activity.Category === view
     })
 
+    //Pagination math
     const totalPages = Math.ceil(filteredActivities.length / itemsPerPage)
     const startIndex = (currentPage - 1) * itemsPerPage
     const paginatedActivities = filteredActivities.slice(startIndex, startIndex + itemsPerPage)
@@ -57,6 +61,7 @@ function App() {
     return (
         <div className="app-container">
             <div className="controls-container">
+                {/*Category anf pagination view*/}
                 <div className="view-selector">
                     <label>Category</label>
                     <select value={view} onChange={handleViewChange}>
@@ -93,7 +98,7 @@ function App() {
                 </div>
             </div>
             <div className={"event-grid-container"}
-            style={loading ? { display: "flex" } : undefined}>
+            style={loading ? { display: "flex", justifyContent: "center", alignItems: "center", height: "100%" } : undefined}>
                 {
                     loading ? (
                         <LoadingIcon />

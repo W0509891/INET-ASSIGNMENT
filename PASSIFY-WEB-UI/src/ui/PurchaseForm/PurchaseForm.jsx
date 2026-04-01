@@ -4,7 +4,6 @@ import LoadingIcon from "../../ui/LoadingIcon/LoadingIcon.jsx";
 
 import {useState} from "react";
 import {useForm} from "react-hook-form";
-import {Logger} from "sass";
 import {Link} from "react-router-dom";
 
 function PurchaseForm(props) {

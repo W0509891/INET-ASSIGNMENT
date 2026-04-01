@@ -1,10 +1,12 @@
 import {useState} from "react";
 import "./auth.scss"
 import { useAuth } from "../../context/AuthContext.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import LoadingIcon from "../../ui/LoadingIcon/LoadingIcon.jsx";
 
 const Login = ({onSubmit}) => {
     const [formData, setFormData] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -15,6 +17,7 @@ const Login = ({onSubmit}) => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true)
         onSubmit(formData);
     };
 
@@ -40,7 +43,9 @@ const Login = ({onSubmit}) => {
                 required
             />
 
-            <button type="submit">Login</button>
+            <button type="submit" disabled={loading}>
+                {loading ? <LoadingIcon/> : 'Login'}
+            </button>
         </form>
     );
 };
@@ -49,6 +54,7 @@ const Login = ({onSubmit}) => {
 const Signup = ({onSubmit}) => {
 
     const [formData, setFormData] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -59,9 +65,10 @@ const Signup = ({onSubmit}) => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        setLoading(true)
         if (formData.password !== formData.confirmPassword) {
             alert("Passwords do not match");
+            setLoading(false)
             return;
         }
         delete formData.confirmPassword;
@@ -118,7 +125,9 @@ const Signup = ({onSubmit}) => {
                 required
             />
 
-            <button type="submit">Create Account</button>
+            <button type="submit" disabled={loading}>
+                {loading? <LoadingIcon/> : "Create Account"}
+            </button>
         </form>
     );
 };
@@ -129,13 +138,15 @@ const Auth = () => {
     const apiUrl = import.meta.env.VITE_AUTH_API
     const { login } = useAuth();
     const navigate = useNavigate();
+    const [params, setParams] = useSearchParams();
+    const ref = params.get("return") ? decodeURIComponent(params.get("return")) : "/";
+    console.log(ref)
 
     const swap = () => {
         setIsLogin(prev => !prev);
     };
 
     const handleLogin = (data) => {
-        console.log("Login data:", data);
         async function authenticate(data) {
             const response = await fetch(`${apiUrl}/login?email=${data.email}&password=${data.password}`, {
                 method: "GET",
@@ -147,7 +158,7 @@ const Auth = () => {
                 const result = await response.json();
                 if (result.token) {
                     login(result.user, result.token);
-                    navigate('/tickets');
+                    navigate(ref)
                 } else {
                     alert("Invalid credentials");
                 }
@@ -159,7 +170,6 @@ const Auth = () => {
     };
 
     const handleSignup = (data) => {
-        console.log("Signup data:", data);
 
        async function createAccount(data) {
             const response = await fetch(`${apiUrl}/signup`, {
@@ -173,7 +183,7 @@ const Auth = () => {
                 const result = await response.json();
                 if (result.token) {
                     login(result.user, result.token);
-                    navigate('/tickets');
+                    navigate(ref);
                 } else {
                     setIsLogin(true);
                     alert("Account created, please login");

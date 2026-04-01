@@ -26,7 +26,7 @@ createRoot(document.getElementById('root')).render(
            <Routes>
                <Route path="/" element={<App />} />
                <Route path="/details/:id" element={<Details />} />
-               <Route path="/Purchase" element={<Purchase />} />
+               <Route path="/Purchase" element={<ProtectedRoute><Purchase /></ProtectedRoute>} />
                <Route path="/event" element={<Event />} />
                <Route path="/tickets" element={<ProtectedRoute><Ticket /></ProtectedRoute>} />
                <Route path="/auth" element={<Auth />} />
