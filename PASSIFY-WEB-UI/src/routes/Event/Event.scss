@@ -1,0 +1,105 @@
+$primary: #4f46e5;
+$primary-light: #6366f1;
+$bg-dark: #111827;
+$card-bg: #1e293b;
+$text-light: #f9fafb;
+$text-muted: #9ca3af;
+$accent: #f87171;
+$border: rgba(255, 255, 255, 0.05);
+
+.event-page {
+  padding: 4rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $text-light;
+
+  .event-container {
+    max-width: 600px;
+    width: 100%;
+    padding: 3rem;
+    border-radius: 24px;
+    border: 1px solid $border;
+    text-align: center;
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.025em;
+    }
+
+    .description {
+      margin-bottom: 2rem;
+      
+      p {
+        font-size: 1.125rem;
+        line-height: 1.6;
+        color: $text-muted;
+        margin: 0.5rem 0;
+      }
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: $primary;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+
+      &:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.1);
+        box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    .footer-note {
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: $text-muted;
+      
+      span {
+        color: $primary-light;
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .event-page {
+    padding: 2rem 1rem;
+    
+    .event-container {
+      padding: 2rem;
+      
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  }
+}
