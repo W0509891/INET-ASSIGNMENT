@@ -1,16 +1,36 @@
-import {Link} from "react-router-dom";
+import "./Event.scss";
 
 function Event() {
+  return (
+    <div className="event-page">
+      <div className="event-container">
 
-    return (
-        <>
-            <h1>Events</h1>
+        <h1>Host Your Event</h1>
 
-            <p>Hello there, Looking to host an event?</p>
-            <p>You would need to create an account with us and we can get you started</p>
-            <Link to={"/auth"}>Login or Create an account</Link>
-        </>
-    )
+        <div className="description">
+          <p>Looking to share your passion with the world?</p>
+          <p>
+            Join our community of organizers and start selling tickets with ease.
+            We provide all the tools you need to make your event a success.
+          </p>
+        </div>
+
+        <a
+          href={"https://passify-net.azurewebsites.net/"}
+          className="cta-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Get Started as an Organizer
+        </a>
+
+        <p className="footer-note">
+          Already have an account? <span>Contact support</span> to upgrade to
+          admin access.
+        </p>
+      </div>
+    </div>
+  );
 }
 
-export default Event
+export default Event;

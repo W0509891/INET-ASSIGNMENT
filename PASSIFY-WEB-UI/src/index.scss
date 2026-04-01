@@ -18,7 +18,7 @@
     margin: 0;
 }
 #root {
-    width: 100vw;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
 }
@@ -35,7 +35,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  min-width: 100vw;
+  min-width: 100%;
   min-height: 100vh;
 }
 
