@@ -1,5 +1,5 @@
 import PurchaseForm from "../../ui/PurchaseForm/PurchaseForm.jsx";
-import {useParams, useSearchParams, useNavigate} from "react-router-dom";
+import {useParams, useSearchParams, useNavigate, Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 import "./Purchase.scss";
@@ -20,7 +20,10 @@ function Purchase() {
     return (
         <>
             <div className={"purchase-container"}>
-                <h1>Purchase tickets for {eventName}</h1>
+                <h1 >Purchase tickets for {eventName}</h1>
+                <div className="details-header">
+                    <Link to={'/'} className="btn btn-outline-light btn-sm">← Back to home</Link>
+                </div>
                 <PurchaseForm EventId={event_id}/>
             </div>
         </>

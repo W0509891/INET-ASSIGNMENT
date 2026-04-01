@@ -9,6 +9,15 @@ function App() {
     const [view, setView] = useState('all')
     const [currentPage, setCurrentPage] = useState(1)
     const [loading, setLoading] = useState(true)
+    const [isReloaded, setIsReloaded] = useState(false)
+
+    //Check if page was reloaded
+    useEffect(() => {
+        const entries = performance.getEntriesByType('navigation');
+        const isRefresh = entries.length > 0 && entries[0].type === 'reload';
+        setIsReloaded(isRefresh);
+    }, [])
+
     //Pagination count
     const itemsPerPage = 20
 
@@ -100,11 +109,8 @@ function App() {
             <div className={"event-grid-container"}
             style={loading ? { display: "flex", justifyContent: "center", alignItems: "center", height: "100%" } : undefined}>
                 {
-                    loading ? (
-                        <LoadingIcon />
-                    ) : (
-                        paginatedActivities.length > 0 ? (
-                            paginatedActivities.map(activity =>(
+                    loading ? <LoadingIcon /> : (
+                        paginatedActivities.length > 0 ? paginatedActivities.map(activity =>(
                                 <EventCard
                                     key={activity.ActivityId}
                                     ActivityId={activity.ActivityId}
@@ -115,9 +121,20 @@ function App() {
                                     EventEnd={activity.EventEnd}
                                     Organizer={activity.Organizer}
                                 />
-                            ))
-                        ) : (
-                            <p>No events found for this view.</p>
+                            )) : (
+                            <div className="no-events-container">
+                                {view.toLowerCase() === "all" ? (
+                                    <div className="database-sleep-notice">
+                                        <p>Based on the nature of the hosting service the database might be asleep, you may want to refresh the page :(</p>
+
+                                        {isReloaded && (
+                                            <p style={{marginTop: "1rem", fontWeight: "600"}}>If still you still see this, please <a href="mailto:dasil.adam@gmail.com">contact me</a> and I'll investigate right away</p>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <p>No events found for {view}.</p>
+                                )}
+                            </div>
                         )
                     )
                 }

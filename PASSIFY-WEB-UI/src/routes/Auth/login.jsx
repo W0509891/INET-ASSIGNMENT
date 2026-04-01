@@ -1,10 +1,12 @@
 import {useState} from "react";
 import "./auth.scss"
-import { useAuth } from "../../context/AuthContext.jsx";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {useAuth} from "../../context/AuthContext.jsx";
+import {useNavigate, useSearchParams} from "react-router-dom";
+import {Disclaimer} from "../../ui/Disclaimer.jsx";
 import LoadingIcon from "../../ui/LoadingIcon/LoadingIcon.jsx";
 
-const Login = ({onSubmit}) => {
+//lOGIN FORM
+const Login = ({onSubmit, error}) => {
     const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(false);
 
@@ -18,12 +20,17 @@ const Login = ({onSubmit}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true)
-        onSubmit(formData);
+        onSubmit(formData).finally(() => setLoading(false));
     };
 
     return (
         <form className="login-form" onSubmit={handleSubmit}>
+            <Disclaimer
+                size={"15px"} color={"#ff0000"}
+            />
             <h2>Login</h2>
+
+            {error && <div className="error-message">{error}</div>}
 
             <input
                 type="email"
@@ -51,10 +58,12 @@ const Login = ({onSubmit}) => {
 };
 
 
-const Signup = ({onSubmit}) => {
+//SIGNUP FORM
+const Signup = ({onSubmit, error}) => {
 
     const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(false);
+    const [localError, setLocalError] = useState("");
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -66,18 +75,25 @@ const Signup = ({onSubmit}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true)
+        setLocalError("");
         if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match");
+            setLocalError("Passwords do not match");
             setLoading(false)
             return;
         }
-        delete formData.confirmPassword;
-        onSubmit(formData);
+        const submissionData = {...formData};
+        delete submissionData.confirmPassword;
+        onSubmit(submissionData).finally(() => setLoading(false));
     };
 
     return (
         <form className="signup-form" onSubmit={handleSubmit}>
+            <Disclaimer message={"*Please refrain from using sensitive information as this is more for proof of" +
+                " concept."} size={"15px"} color={"white"}
+            />
             <h2>Sign Up</h2>
+
+            {(error || localError) && <div className="error-message">{error || localError}</div>}
 
             <div className={"name-group"}>
                 <input
@@ -126,17 +142,19 @@ const Signup = ({onSubmit}) => {
             />
 
             <button type="submit" disabled={loading}>
-                {loading? <LoadingIcon/> : "Create Account"}
+                {loading ? <LoadingIcon/> : "Create Account"}
             </button>
         </form>
     );
 };
 
 
+//AUTH PAGE
 const Auth = () => {
     const [isLogin, setIsLogin] = useState(true);
+    const [error, setError] = useState("");
     const apiUrl = import.meta.env.VITE_AUTH_API
-    const { login } = useAuth();
+    const {login} = useAuth();
     const navigate = useNavigate();
     const [params, setParams] = useSearchParams();
     const ref = params.get("return") ? decodeURIComponent(params.get("return")) : "/";
@@ -144,10 +162,12 @@ const Auth = () => {
 
     const swap = () => {
         setIsLogin(prev => !prev);
+        setError("");
     };
 
-    const handleLogin = (data) => {
-        async function authenticate(data) {
+    const handleLogin = async (data) => {
+        setError("");
+        try {
             const response = await fetch(`${apiUrl}/login?email=${data.email}&password=${data.password}`, {
                 method: "GET",
                 headers: {
@@ -160,18 +180,20 @@ const Auth = () => {
                     login(result.user, result.token);
                     navigate(ref)
                 } else {
-                    alert("Invalid credentials");
+                    setError("Invalid credentials");
                 }
             } else {
-                alert("Login failed");
+                setError("Login failed");
             }
+        } catch (error) {
+            console.error(error);
+            setError("An unexpected error occurred");
         }
-        authenticate(data).catch(error => console.error(error));
     };
 
-    const handleSignup = (data) => {
-
-       async function createAccount(data) {
+    const handleSignup = async (data) => {
+        setError("");
+        try {
             const response = await fetch(`${apiUrl}/signup`, {
                 method: "POST",
                 body: JSON.stringify(data),
@@ -186,14 +208,15 @@ const Auth = () => {
                     navigate(ref);
                 } else {
                     setIsLogin(true);
-                    alert("Account created, please login");
+                    setError("Account created, please login");
                 }
             } else {
-                alert("Signup failed");
+                setError("Signup failed");
             }
+        } catch (error) {
+            console.error(error);
+            setError("An unexpected error occurred");
         }
-
-        createAccount(data).catch(error => console.error(error));
     };
 
     return (
@@ -201,9 +224,9 @@ const Auth = () => {
             <div className={"auth-page-container"}>
 
                 {isLogin ? (
-                    <Login onSubmit={handleLogin}/>
+                    <Login onSubmit={handleLogin} error={error}/>
                 ) : (
-                    <Signup onSubmit={handleSignup}/>
+                    <Signup onSubmit={handleSignup} error={error}/>
                 )}
 
                 <button type="button" onClick={swap}>
