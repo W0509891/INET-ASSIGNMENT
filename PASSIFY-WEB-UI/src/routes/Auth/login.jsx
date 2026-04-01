@@ -140,7 +140,7 @@ const Auth = () => {
     const navigate = useNavigate();
     const [params, setParams] = useSearchParams();
     const ref = params.get("return") ? decodeURIComponent(params.get("return")) : "/";
-    console.log(ref)
+
 
     const swap = () => {
         setIsLogin(prev => !prev);
