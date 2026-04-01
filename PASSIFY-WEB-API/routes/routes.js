@@ -224,7 +224,6 @@ router.get('/createticket', async (req, res) => {
         res.send({message: "Success", status: 200, result: result.recordsets[0][0]})
         await createTicket(result.recordsets[0][0], email)
     }
-
 })
 
 //GET /api/activities/1
