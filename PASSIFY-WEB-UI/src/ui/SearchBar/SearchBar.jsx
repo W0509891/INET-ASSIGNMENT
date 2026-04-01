@@ -28,7 +28,8 @@ function SearchBar() {
 
     const [searchResult, setSearchResults] = useState([]) //State for search results
     const [searchValue, setSearchValue] = useState("") //State for search value
-    const [searchFocus, setSearchFocus] = useState(false) //State for search value
+    const [searchFocus, setSearchFocus] = useState(false) //State for search focus
+    const [loading, setLoading] = useState(false) //State for loading
 
     const apiUrl = import.meta.env.VITE_API_URL //API URL
 
@@ -46,31 +47,35 @@ function SearchBar() {
 
         //Only search if the search value is at least 3 characters
         if (e.target.value.length >= 3) {
+            setLoading(true)
+            try {
+                //Fetch search results from API
+                let response = await fetch(apiUrl + "/search?event_name=" + e.target.value, {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
 
-            //Fetch search results from API
-            let response = await fetch(apiUrl + "/search?event_name=" + e.target.value, {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json'
+                //Save search results to state
+                const data = await response.json()
+                console.log("Data", data)
+                console.log("ResponseStatus", response.status)
+
+                //If the response is successful, save the search results to state.
+                if (response.status === 200) {
+                    setSearchResults(data)
                 }
-            })
 
-            //Save search results to state
-            const data = await response.json()
-            console.log("Data", data)
-            console.log("ResponseStatus", response.status)
-
-            //If the response is successful, save the search results to state.
-            if (response.status === 200) {
-                setSearchResults(data)
+                //Otherwise, set the state to an empty array.
+                else {
+                    setSearchResults([{ActivityId: null}])
+                }
+            } catch (error) {
+                console.error("Search failed:", error)
+            } finally {
+                setLoading(false)
             }
-
-            //Otherwise, set the state to an empty array.
-            else {
-                setSearchResults([{ActivityId: null}])
-            }
-
-            console.log("Search result", searchResult)
         }
     }
 
@@ -93,19 +98,27 @@ function SearchBar() {
 
                 {/*Only render the component if the search value is at least 3 characters long.*/}
                 {searchFocus &&
-                    searchValue.length > 3 && (
+                    searchValue.length >= 3 && (
                         <div className={"search-results"}>
-
-                            {/*Render search results.*/}
-                            {searchResult && searchResult.map(item =>
-                                <SearchResultCard
-                                    Key={item.ActivityId}
-                                    ActivityId={item.ActivityId}
-                                    ActivityName={item.ActivityName}
-                                    ImageName={item.ImageName}
-                                    Description={item.Description}
-                                />)}
-
+                            {loading ? (
+                                <div className={"search-result-item-none"}>
+                                    <div className="None">
+                                        <p>loading...</p>
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    {/*Render search results.*/}
+                                    {searchResult && searchResult.map(item =>
+                                        <SearchResultCard
+                                            Key={item.ActivityId}
+                                            ActivityId={item.ActivityId}
+                                            ActivityName={item.ActivityName}
+                                            ImageName={item.ImageName}
+                                            Description={item.Description}
+                                        />)}
+                                </>
+                            )}
                         </div>
                     )
                 }

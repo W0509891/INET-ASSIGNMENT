@@ -14,7 +14,7 @@ function PurchaseForm(props) {
 
     const apiUrl = import.meta.env.VITE_API_URL
     const {register, handleSubmit, formState: {errors}} = useForm();
-
+    const user = JSON.parse(localStorage.getItem("user"))
     const [isLoaing, setIsLoading] = useState(null)
 
     let tregex = /^\d+$/;
@@ -95,7 +95,7 @@ function PurchaseForm(props) {
         console.log(res)
         if (res.status === 200) {
 
-            let req2 = await fetch(`${apiUrl}/createticket?event_id=${e.event_id}`, {
+            let req2 = await fetch(`${apiUrl}/createticket?event_id=${e.event_id}&user_email=${e.email}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json'
@@ -139,6 +139,8 @@ function PurchaseForm(props) {
                     <div className={"formfieldgroup"}>
                         <label>Email</label>
                         <input type="text" name="email" placeholder={"example@domain.com"}
+                               defaultValue={user.email}
+                               disabled={true}
                                style={{borderColor: errors.email ? "#ff0000" : "#cccccc"}}
                                {...register("email", {required: true, pattern: eregex})}/>
                     </div>

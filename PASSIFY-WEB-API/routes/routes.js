@@ -1,6 +1,6 @@
 import express from 'express';
 import sql from "mssql";
-import {createTicket, getTickets} from "./TicketService.js";
+import {createTicket, getTickets} from "../services/TicketService.js";
 import 'dotenv/config';
 
 
@@ -199,6 +199,8 @@ router.get('/search', async (req, res) => {
 router.get('/createticket', async (req, res) => {
 
     const searchParam = req.query.event_id;
+    const email = req.query.user_email;
+    console.log(req.query)
     await sql.connect(dbconnstr)
 
     const result = await sql.query(
@@ -220,15 +222,10 @@ router.get('/createticket', async (req, res) => {
     }
     else {
         res.send({message: "Success", status: 200, result: result.recordsets[0][0]})
-        createTicket(result.recordsets[0][0])
+        await createTicket(result.recordsets[0][0], email)
     }
-
 })
 
-router.get('/tickets', async (req, res) => {
-    const tickets = await getTickets()
-    res.send(tickets)
-})
 //GET /api/activities/1
 router.get('/:id', async (req, res) => {
     const id = req.params.id;

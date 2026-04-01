@@ -1,8 +1,9 @@
 import express from "express";
-import router from "./routes.js";
+import router from "./routes/routes.js";
+import user_router from "./routes/user.js";
 import cors from "cors";
 
-const port = 3000;
+const port = process.env.PORT | 3000;
 const app = express();
 
 //Middleware
@@ -13,6 +14,7 @@ app.use(cors());
 
 //Routes (API endpoints)
 app.use("/api/activities", router)
+app.use("/api/user", user_router)
 
 
 //Routes (HTML endpoints)
